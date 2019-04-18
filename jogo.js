@@ -12,6 +12,8 @@ var telas = [
         "fundopc" //1
 ];
 
+var oi;
+
 var telasAnteriores = [
     0,
     0
