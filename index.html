@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport"
+		content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
+	<title>Meu Joguinho</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css" />
+	<script type="text/javascript" src="jquery.js"></script>
+	
+</head>
+
+<body>
+
+	<div id="divJogo"></div>
+	<div>	
+		<img src="imagens/celular.png" class=celular >
+		
+	</div> 
+	<div class="fundo-chat" id="chat">
+			<img src="imagens/msg1.png" class="msgalex1" id="msg1">
+			<img src="imagens/1a.png" class="msgfred" id="1a">
+			<img src="imagens/1b.png" class="msgfred" id="1b">
+			<img src="imagens/msg2.png" class="msgalex" id="msg2">
+			<img src="imagens/2a.png" class="msgfred" id="2a">
+			<img src="imagens/2b.png" class="msgfred" id="2b">
+			<img src="imagens/msg3.png" class="msgalex" id="msg3">
+			<img src="imagens/3a.png" class="msgfred" id="3a">
+			<img src="imagens/3b.png" class="msgfred" id="3b">
+			<img src="imagens/msg4.png" class="msgalex" id="msg4">
+			<img src="imagens/4a.png" class="msgfred" id="4a">
+			<img src="imagens/4b.png" class="msgfred" id="4b">
+			<img src="imagens/msg5.png" class="msgalex" id="msg5">	
+		<div class="ultimamsg"></div>		
+	</div>
+		<div class="contato" id="contato">
+			<img src="imagens/alex.png" class="imagem">
+			<div id="texto"> Alex </div>
+		</div>
+
+		<div class="input" id="input">
+			<div id="grupo1">
+				<button class="ind_button" onclick="clicar1a()" >ooi alex</button>
+				<button class="ind_button" onclick="clicar1b()">olá</button>
+			</div>
+			<div id="grupo2" class="escondido">
+				<button class="ind_button" onclick="clicar2a()">ontem foi loucoo hahahah</button>
+				<button class="ind_button" onclick="clicar2b()">não o vejo desde ontem… pq?</button>
+			</div>
+			<div id="grupo3" class="escondido">
+				<button class="ind_button" onclick="clicar3a()">espera, você falou com a mãe dele?</button>
+				<button class="ind_button" onclick="clicar3b()"> a mae dele sempre gostou de vc ne...</button>
+			</div>
+			<div id="grupo4" class="escondido">
+				<button class="ind_button" onclick="clicar4a()">entao eu vou ai pra gnt procurar junto</button>
+				<button class="ind_button" onclick="clicar4b()">so vou me arrumar e ja chego ai, blz?</button>
+			</div>
+		</div>
+
+
+    <button style="position: absolute; top: 580px; background: #f0f; left: 200px;" onclick="toggleDivInventario()"><img alt="Imagem" src="" /></button>
+    
+    <div id="divInventario" class="escondido" style="width: 250px; height: 400px; position: absolute; top: 150px; background: #f0f; left: 200px;"></div>
+    
+    <script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="phaser.min.js"></script>
+	<script type="text/javascript" src="chat.js"></script>
+	<script type="text/javascript" src="jogo.js"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
+
+	<title>Meu Joguinho</title>
+	
+	<style type="text/css">
+		body {
+			background: #e3a;
+			padding: 0;
+			margin: 0;
+			color: #fff;
+			font: normal 14px sans-serif;
+		}
+
+		/*
+			Esse estilo é para centralizar a tela do jogo no desktop,
+			sem dar um "pulo" no início! :)
+		*/
+		canvas {
+			display: block;
+			margin: 0 auto;
+            background: #e3a;
+		}
+	</style>
+</head>
+<body>
+
+	<div id="divJogo"></div>
+
+	<script type="text/javascript" src="phaser.min.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	"use strict";
+
+	// Essa não é a forma mais "prosissional" de fazer, mas é a mais simples :)
+
+	// Vamos chamar a variável de game, para ficar igual ao sandbox!
+	var game = new Phaser.Game(1280, 720, Phaser.AUTO, "divJogo");
+        
+    function TelaInicial(game) {
+
+        var botao1, botao2;
+        var cdt, fundo;
+        
+        var botaoPodeClicar, telaAtual, telaDepoisDoFadeOut;
+
+        var telas = [
+            "azul",     // 0
+            "verde",    // 1
+            "laranja",  // 2
+            "vermelho"  // 3
+        ];
+        var telasAnteriores = [
+            0, // anterior da 0
+            2, // anterior da 1
+            2, // anterior da 2
+            1  // anterior da 3
+        ];
+        var telasPosteriores = [
+            3, // posterior da 0
+            0, // posterior da 1
+            1, // posterior da 2
+            0  // posterior da 3
+        ];
+        var textosTelas = [
+            "Texto da azul", // posterior da 0
+            "Texto da verde", // posterior da 1
+            "Texto da laranja", // posterior da 2
+            "Texto da vermelho"  // posterior da 3
+        ];
+        
+
+		// A função init() não aparecia no sandbox porque eles fazem ela por nós lá! :)
+		this.init = function () {
+
+			game.input.maxPointers = 1;
+
+			// Deixar o jogo executando, mesmo se o browser mudar de aba?
+			game.stage.disableVisibilityChange = true;
+
+			if (game.device.desktop) {
+				// Configurações específicas para desktop
+
+				// Como criamos o CSS acima, não precisamos centralizar via código
+				game.scale.pageAlignHorizontally = false;
+			} else {
+				// Configurações específicas para celulares
+
+				game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+				// Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
+				game.scale.setMinMax(400, 300, 1280, 720);
+				game.scale.forceLandscape = true;
+				// Como criamos o CSS acima, não precisamos centralizar via código
+				game.scale.pageAlignHorizontally = false;
+			}
+
+		}
+
+		this.preload = function () {
+            game.load.crossOrigin = "anonymous";
+            
+            game.load.image("botoest","sprites/bteste.png");
+            game.load.image("text","sprites/textoteste.png");
+
+            game.load.image("vermelho","sprites/vermelho.png");
+            game.load.image("laranja","sprites/laranja.png");
+            game.load.image("azul","sprites/azul.png");
+            game.load.image("verde","sprites/verde.png");
+		}
+
+		this.create = function () {
+            
+            telaAtual = 0;
+            botaoPodeClicar = true;
+            
+            fundo = game.add.image(0, 0, telas[telaAtual]);
+            document.title = textosTelas[telaAtual];
+
+            //caixa de texto
+            cdt = game.add.image(620,280, "text");
+            
+            //botoes de decisao
+            botao1 = game.add.image(300,550,"botoest");
+            botao1.anchor.set(0.5);
+            botao1.alpha = 0.7;
+            botao1.inputEnabled = true;
+			botao1.input.useHandCursor = true;
+			botao1.events.onInputDown.add(acaoBotao1, this);
+
+            botao2 = game.add.image(930,550,"botoest");
+            botao2.anchor.set(0.5);
+            botao2.alpha = 0.7;
+            botao2.inputEnabled = true;
+			botao2.input.useHandCursor = true;
+			botao2.events.onInputDown.add(acaoBotao2, this);
+		}
+        
+
+		this.update = function () {
+
+		}
+
+        function fadeOutOk() {
+            fundo.kill();
+            telaAtual = telaDepoisDoFadeOut;
+            fundo = game.add.image(0, 0, telas[telaAtual]);
+            fundo.alpha = 0;
+            fundo.sendToBack();
+            document.title = textosTelas[telaAtual];
+
+            game.add.tween(fundo).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeInOk, this);
+        }
+
+        function fadeInOk() {
+            botaoPodeClicar = true;
+        }
+        
+        function acaoBotao1() {
+            if (botaoPodeClicar == true) {
+                telaDepoisDoFadeOut = telasAnteriores[telaAtual];
+                if (telaAtual != telaDepoisDoFadeOut) {
+                    botaoPodeClicar = false;
+                    game.add.tween(fundo).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeOutOk, this);
+                }
+            }
+            
+            //fundo.kill();
+            //telaAtual = telasAnteriores[telaAtual];
+            //fundo = game.add.image(0, 0, telas[telaAtual]);
+            //fundo.sendToBack();
+            //document.title = textosTelas[telaAtual];
+        }
+        
+        function acaoBotao2() {
+            if (botaoPodeClicar == true) {
+                telaDepoisDoFadeOut = telasPosteriores[telaAtual];
+                if (telaAtual != telaDepoisDoFadeOut) {
+                    botaoPodeClicar = false;
+                    game.add.tween(fundo).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeOutOk, this);
+                }
+            }
+
+            //fundo.kill();
+            //telaAtual = telasPosteriores[telaAtual];
+            //fundo = game.add.image(0, 0, telas[telaAtual]);
+            //fundo.sendToBack();
+            //document.title = textosTelas[telaAtual];
+        }
+	}
+
+	// Os estados do jogo podem ser entendidos como "telas" ou "cenários"
+	// Se nosso jogo tivesse mais de uma "tela", bastaria adicionar as telas aqui,
+	// dando nomes para cada uma (para alternar entre uma tela e outra, bastaria
+	// executar jogo.state.start("Nome da tela") a qualquer momento)
+	game.state.add("TelaInicial", TelaInicial);
+	game.state.start("TelaInicial");
+
+	//]]>
+	</script>
+</body>
+</html>

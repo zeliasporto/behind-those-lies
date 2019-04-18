@@ -1,0 +1,170 @@
+
+		body {
+			background: #000;
+			padding: 0;
+			margin: 0;
+			color: #fff;
+			font: normal 14px sans-serif;
+		}
+		
+		canvas {
+			display: block;
+			margin: 0 auto;
+		}
+
+		.fundo {
+			height: 600px;
+			width: 800px;
+		}
+
+		.celular {
+			position: absolute;
+			height: 437px;
+            width: 544px;
+			bottom: 5px;
+			right: -165px;
+		}
+
+		.fundo-chat {
+			position: absolute;
+			right: 13px;
+			bottom: 123px;
+			width: 188px;
+			height: 201px;
+			background-color: rgba(195, 230, 222, 0.938);
+			overflow-y: auto;
+  			overflow-x: none;
+		}
+
+		.telabloqueada {
+			position: absolute;
+			display: block;
+			z-index: 1;
+			right: 13px;
+			bottom: 85px;
+		}
+
+		.unlock {
+			position: absolute;
+			visibility: hidden;
+			z-index: 1;
+			right: 13px;
+			bottom: 85px;
+			height: 273px;
+			width: 188px;
+		}
+
+		.contato {
+			position: absolute;
+			right: 13px;
+			bottom: 324px;
+			width: 188px;
+			height: 35px;
+			background-color: darkcyan;
+			color: white;
+			font: 2vh Prestige Elite Std;
+
+		}
+
+		.input {
+			position: absolute;
+			right: 12.5px;
+			width: 188px;
+			height: 35px;
+			background-color: darkcyan;
+			color: white;
+			bottom: 88px;
+			float: left;
+		}
+
+		.bottom {
+			bottom: 153px;
+			width: 188px;
+			height: 30px;
+			right: 12.5px;
+
+		}
+
+		.escondido {
+			display: none;
+		}
+
+		.ind_button {
+			font: 1.5vh Prestige Elite Std;
+			background-color: darkcyan;
+			color: white;
+			width: 94px;
+			height: 35px;
+			float: left;
+			margin-left: 0px;
+			cursor: pointer;
+			z-index: 1;
+		}
+
+
+		.ind_button:hover {
+			background-color: #a2dad770
+		}
+
+		#texto {
+			position: absolute;
+			right: 45px;
+			top: 13px;
+			width: 100px;
+			height: 160px;
+		}
+
+		.imagem {
+			position: relative;
+			height: 30px;
+			width: 32px;
+			left: 5px;
+			bottom: -2.5px;
+		}
+
+
+		.msgalex {
+			position: relative;
+			height: 15%;
+			left: 0px;
+			margin-top: 5px;
+			display: none;
+			clear: both;
+			
+		}
+
+		.msgalex1 {
+			position: relative;
+			height: 15%;
+			left: 0px;
+			margin-top: 5px;
+			display: block;
+			
+		}
+
+		.msgfred {
+			position: relative;
+			height: 15%;
+			float: right;
+			margin-top: 5px;
+			display: none;
+			clear: both;
+			
+		}
+
+		::-webkit-scrollbar {
+		width: 5px;
+		}
+
+		::-webkit-scrollbar-track {
+		background: transparent; 
+		}
+		
+		::-webkit-scrollbar-thumb {
+		background: #888; 
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+		background: #555; 
+        }
+        
