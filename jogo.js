@@ -16,7 +16,7 @@ var telasAnteriores = [
     0,
     0
 ];
-
+//comentario teste - GITHUB
 var telasPosteriores = [
     1
 ];
