@@ -3,23 +3,20 @@
 
 // Vamos chamar a variável de game, para ficar igual ao sandbox!
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "divJogo");
-
-var botao1, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
+var botao1, botao2, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
     divInventario = document.getElementById("divInventario"), inventario = {};
 
 var telas = [
-        "quarto", //0
-        "fundopc" //1
+        "quarto"
 ];
 
 var telasAnteriores = [
-    0,
     0
 ];
-//comentario teste - GITHUB
+
 var telasPosteriores = [
-    1
-];
+
+]; 
 
 function itemEstaNoInventario(nomeItem) {
     return (nomeItem in inventario);
@@ -59,7 +56,6 @@ function itemInventarioClicado(nomeItem) {
     alert(nomeItem);
 }
 
-
 function TelaInicial(game) {
 
     // A função init() não aparecia no sandbox porque eles fazem ela por nós lá! :)
@@ -67,7 +63,6 @@ function TelaInicial(game) {
     this.init = function () {
 
         game.input.maxPointers = 1;
-
         // Deixar o jogo executando, mesmo se o browser mudar de aba?
         game.stage.disableVisibilityChange = true;
 
@@ -78,7 +73,6 @@ function TelaInicial(game) {
             game.scale.pageAlignHorizontally = false;
         } else {
             // Configurações específicas para celulares
-
             game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
             game.scale.setMinMax(400, 300, 800, 600);
@@ -95,9 +89,13 @@ function TelaInicial(game) {
         game.load.image("quarto", "imagens/quarto.png");
         game.load.image("pc", "imagens/pc.png");
         game.load.image("fundopc", "imagens/fundopc.png");
-        game.load.image("exitbutton", "imagens/exitbutton.png");
+        game.load.image("fechar", "imagens/fechar.png");
+        game.load.image("mochila", "imagens/mochila.png");
     }
 
+    var tween = null;
+    var popup; 
+    
     this.create = function () {
         telaAtual = 0;
         botaoPodeClicar = true;
@@ -106,10 +104,60 @@ function TelaInicial(game) {
         
         botao1 = game.add.image(355, 470, "pc");
         botao1.anchor.set(0.5);
-        botao1.alpha = 0.7;
+        botao1.alpha = 1.0;
         botao1.inputEnabled = true;
         botao1.input.useHandCursor = true;
-        botao1.events.onInputDown.add(acaoBotao1, this);
+        botao1.events.onInputDown.add(abrirPc, this);
+        
+        
+        function abrirPc() {
+            
+            popup = game.add.image(game.world.centerX, game.world.centerY, 'fundopc');
+            popup.alpha = 1.0;
+            popup.anchor.set(0.5);
+            popup.inputEnabled = true;
+
+            var pw = (popup.width / 2) - 50;
+            var ph = (popup.height / 2) - 8;
+
+            var fechar = game.add.image(pw, -ph, "fechar");
+            fechar.inputEnabled = true;
+            fechar.input.priorityID = 1;
+            fechar.input.useHandCursor = true;
+            fechar.events.onInputDown.add(fecharPc, this);
+
+            popup.addChild(fechar);
+            popup.scale.set(0.1);
+
+            if ((tween !== null && tween.isRunning) || popup.scale.x === 1) {
+            return;
+             }
+            tween = game.add.tween(popup.scale).to( { x: 0.9, y: 0.9 }, 200, Phaser.Easing.Linear.Out, true);   
+        }
+
+        function fecharPc() {
+            popup.kill();
+        }
+        
+        botao2 = game.add.image(100, 150, "mochila");
+        botao2.anchor.set(0.5);
+        botao2.alpha = 1.0;
+        botao2.inputEnabled = true;
+        botao2.input.useHandCursor = true;
+        botao2.events.onInputDown.add(criarInventario, this);
+        
+        function criarInventario() {
+            botao2.kill();
+            inventario = game.add.image(70, 500, "mochila");
+            inventario.anchor.set(0.5);
+            inventario.alpha = 1.0;
+            inventario.inputEnabled = true;
+            inventario.input.useHandCursor = true;
+            inventario.events.onInputDown.add(toggleDivInventario, this);
+        }
+        
+         
+             
     }
         
     this.update = function () {
@@ -130,7 +178,7 @@ function TelaInicial(game) {
         botaoPodeClicar = true;
     }
 
-    function acaoBotao1() {
+    /*function acaoBotao1() {
         if (botaoPodeClicar == true) {
                 telaDepoisDoFadeOut = telasPosteriores[telaAtual];
                 botao1.kill();
@@ -140,8 +188,8 @@ function TelaInicial(game) {
                     
             }
         }
-    }
-
+    } */
+ 
 }
 
 

@@ -25,7 +25,26 @@
 			right: -165px;
 		}
 
-		.fundo-chat {
+        #preto {
+            position: absolute;
+            right: 13px;
+            bottom: 88px;
+            width: 188px;
+            height: 271px;
+            z-index: 1;
+        }
+
+        #wallpaper {
+            position: absolute;
+            right: 13px;
+            bottom: 88px;
+            width: 188px;
+			height: 271px;
+            z-index: 1;
+            
+        }
+
+		#chat {
 			position: absolute;
 			right: 13px;
 			bottom: 123px;
@@ -34,25 +53,38 @@
 			background-color: rgba(195, 230, 222, 0.938);
 			overflow-y: auto;
   			overflow-x: none;
+            z-index: 0;
 		}
 
-		.telabloqueada {
-			position: absolute;
-			display: block;
-			z-index: 1;
-			right: 13px;
-			bottom: 85px;
-		}
+        .horas {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 35px;
+            color: #000;
+            right: 17px;
+			bottom: 265px;
+            z-index: 1;
+        }
 
-		.unlock {
-			position: absolute;
-			visibility: hidden;
-			z-index: 1;
-			right: 13px;
-			bottom: 85px;
-			height: 273px;
-			width: 188px;
-		}
+        .remetente {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: #000;
+            right: 140px;
+			bottom: 215px;
+            z-index: 1;
+        }
+
+        .conteudo {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: #000;
+            left: 1095px;
+			bottom: 200px;
+            z-index: 1;
+        }
 
 		.contato {
 			position: absolute;
@@ -62,8 +94,9 @@
 			height: 35px;
 			background-color: darkcyan;
 			color: white;
-			font: 2vh Prestige Elite Std;
-
+			font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            z-index: 0;
 		}
 
 		.input {
@@ -75,14 +108,7 @@
 			color: white;
 			bottom: 88px;
 			float: left;
-		}
-
-		.bottom {
-			bottom: 153px;
-			width: 188px;
-			height: 30px;
-			right: 12.5px;
-
+            z-index: 0;
 		}
 
 		.escondido {
@@ -90,7 +116,8 @@
 		}
 
 		.ind_button {
-			font: 1.5vh Prestige Elite Std;
+			font-family: 'Press Start 2P', cursive;
+            font-size: 6px;
 			background-color: darkcyan;
 			color: white;
 			width: 94px;
@@ -98,7 +125,7 @@
 			float: left;
 			margin-left: 0px;
 			cursor: pointer;
-			z-index: 1;
+			z-index: 0;
 		}
 
 
@@ -112,6 +139,7 @@
 			top: 13px;
 			width: 100px;
 			height: 160px;
+            z-index: 0;
 		}
 
 		.imagem {
@@ -120,7 +148,9 @@
 			width: 32px;
 			left: 5px;
 			bottom: -2.5px;
+            z-index: 0;
 		}
+
 
 
 		.msgalex {
@@ -130,16 +160,7 @@
 			margin-top: 5px;
 			display: none;
 			clear: both;
-			
-		}
-
-		.msgalex1 {
-			position: relative;
-			height: 15%;
-			left: 0px;
-			margin-top: 5px;
-			display: block;
-			
+            z-index: 0;			
 		}
 
 		.msgfred {
@@ -149,7 +170,7 @@
 			margin-top: 5px;
 			display: none;
 			clear: both;
-			
+            z-index: 0;
 		}
 
 		::-webkit-scrollbar {

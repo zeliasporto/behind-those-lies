@@ -9,6 +9,7 @@
 		content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
 	<title>Meu Joguinho</title>
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 	<script type="text/javascript" src="jquery.js"></script>
 	
 </head>
@@ -17,11 +18,17 @@
 
 	<div id="divJogo"></div>
 	<div>	
-		<img src="imagens/celular.png" class=celular >
-		
+		<img src="imagens/celular.png" class=celular>
 	</div> 
+    <div id="preto" class="escondido"><img src="imagens/preto.jpg"></div>
+    <div id="telabloqueada">
+        <button onclick="desbloquear()"><img src="imagens/wallpaper.png" id="wallpaper"></button>
+        <p class="horas" id="11h">11:40</p>
+        <p class="remetente" id="alex">Alex</p>
+        <p class="conteudo" id="oiFred">Oi Fred</p>
+    </div>
 	<div class="fundo-chat" id="chat">
-			<img src="imagens/msg1.png" class="msgalex1" id="msg1">
+			<img src="imagens/msg1.png" class="msgalex" id="msg1">
 			<img src="imagens/1a.png" class="msgfred" id="1a">
 			<img src="imagens/1b.png" class="msgfred" id="1b">
 			<img src="imagens/msg2.png" class="msgalex" id="msg2">
@@ -59,11 +66,10 @@
 				<button class="ind_button" onclick="clicar4b()">so vou me arrumar e ja chego ai, blz?</button>
 			</div>
 		</div>
-
-
-    <button style="position: absolute; top: 580px; background: #f0f; left: 200px;" onclick="toggleDivInventario()"><img alt="Imagem" src="" /></button>
     
-    <div id="divInventario" class="escondido" style="width: 250px; height: 400px; position: absolute; top: 150px; background: #f0f; left: 200px;"></div>
+        <div id="divInventario" class="escondido" style="width: 721px; height: 541px; position: absolute; bottom: 28px; background: #000; left: 277px; z-index: 0;">
+        </div>
+
     
     <script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="phaser.min.js"></script>
@@ -71,6 +77,7 @@
 	<script type="text/javascript" src="jogo.js"></script>
     
 
+    
 </body>
 
 </html>
