@@ -25,6 +25,7 @@
 			right: -165px;
 		}
 
+
         #preto {
             position: absolute;
             right: 13px;
@@ -60,7 +61,7 @@
             position: absolute;
             font-family: 'Press Start 2P', cursive;
             font-size: 35px;
-            color: #000;
+            color: #fff;
             right: 17px;
 			bottom: 265px;
             z-index: 1;
@@ -70,7 +71,7 @@
             position: absolute;
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
-            color: #000;
+            color: #fff;
             right: 140px;
 			bottom: 215px;
             z-index: 1;
@@ -80,7 +81,7 @@
             position: absolute;
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
-            color: #000;
+            color: #fff;
             left: 1095px;
 			bottom: 200px;
             z-index: 1;
@@ -172,6 +173,47 @@
 			clear: both;
             z-index: 0;
 		}
+
+        .itenstxt {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 25px;
+            color: #fff;
+            background-position: top;
+            left: 90px;
+        }
+
+        .mapatxt {
+            position: absolute;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 25px;
+            color: #fff;
+            background-position: top;
+            left: 410px; 
+        }
+
+    /* width: 650px; height: 501px; position: absolute; bottom: 68px; background: #000; left: 370px; z-index: 0; */
+
+        .itens {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        height:  400px;
+        background: transparent;
+        width: 280px;
+        box-shadow:
+        0 0 0.1vw  0.4vw #fff7f7,   
+        0 0 0.4vw  0.6vw #e97272, 
+        0 0   4vw  0.4vw #e50b0b,
+        inset 0 0 1.5vw  0.4vw #e50b0b,
+        inset 0 0 0.4vw  0.2vw #e97272,
+        inset 0 0 0.5vw  0.2vw #fff7f7;
+        border-radius: 1rem;
+        }
+
+        .mapa {
+
+        }
 
 		::-webkit-scrollbar {
 		width: 5px;
