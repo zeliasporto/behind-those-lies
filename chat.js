@@ -8,7 +8,6 @@
     document.getElementById(nomeDoGrupo).className = "";
     ultimoGrupoMostrado = nomeDoGrupo;
   }
-
     
     function desbloquear () {
     document.getElementById("telabloqueada").className = "escondido";

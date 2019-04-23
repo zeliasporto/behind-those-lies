@@ -3,8 +3,13 @@
 
 // Vamos chamar a variável de game, para ficar igual ao sandbox!
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "divJogo");
-var botao1, botao2, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
+var botao1, botao2, botao3, botao4, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
     divInventario = document.getElementById("divInventario"), inventario = {};
+var abalinkItens = document.getElementById("abalinkItens");
+var abalinkMapa = document.getElementById("abalinkMapa");
+var Itens = document.getElementById("Itens");
+var Mapa = document.getElementById("Mapa");
+
 
 var telas = [
         "quarto"
@@ -44,10 +49,10 @@ function removerDoInventario(nomeItem) {
 }
 
 function toggleDivInventario() {
-    if (divInventario.className == "escondido") {
-        divInventario.className = "";
+    if (divInventario.style.display == "none") {
+        divInventario.style.display = "block";
     } else {
-        divInventario.className = "escondido";
+        divInventario.style.display = "none";
     }
 }
 
@@ -152,12 +157,39 @@ function TelaInicial(game) {
             inventario.anchor.set(0.5);
             inventario.alpha = 1.0;
             inventario.inputEnabled = true;
-            inventario.input.useHandCursor = true;
+            inventario.input.useHandCursor = true; 
             inventario.events.onInputDown.add(toggleDivInventario, this);
         }
         
-         
-             
+        
+        abalinkItens.alpha = 1.0;
+        abalinkItens.inputEnabled = true;
+        abalinkItens.input.useHandCursor = true;
+        abalinkItens.events.onInputDown.add(abrirItens, this);      
+
+    
+        function abrirItens () {
+            if (Itens.className == "escondido") {
+                Itens.className = "";
+            } else {
+                Itens.className = "escondido";
+            }
+        }
+    
+        abalinkMapa.alpha = 1.0;
+        abalinkMapa.inputEnabled = true;
+        abalinkMapa.input.useHandCursor = true;
+        abalinkMapa.events.onInputDown.add(abrirMapa, this);      
+   
+    
+        function abrirMapa () {
+            if (Mapa.className == "escondido") {
+                Mapa.className = "";
+            } else {
+                Mapa.className = "escondido";
+            }
+        }
+       
     }
         
     this.update = function () {

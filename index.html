@@ -67,18 +67,46 @@
 			</div>
 		</div>
     
-        <div id="divInventario" class="escondido" style="width:650px; height: 501px; position: absolute; bottom: 68px; background: #000; left: 370px; z-index: 0;">
-            <p class="itenstxt">Itens</p>
-            <div class="itens"></div>
-            <p class="mapatxt">Mapa</p>
-            <div class="mapa"></div>
+
+        <div id="divInventario" class="divInventario">
+          <p id="abalinkItens" class="abalink" style="
+            float: left;
+            text-decoration: underline;
+            border-color: transparent;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 25px;
+            padding: 0px 0px;
+            color: #fff;
+            background-position: top;
+            left: 60px;
+            margin: 0 20px;
+            border-spacing: 20px;
+            background: transparent;">Itens</p>
+        </div> 
+
+        <div id="Itens" class="escondido" style=" background: #fff;
+            width: 530px;
+            height: 350px;
+            bottom: 708px;
+            left: 60px;
+            z-index: 1;
+            position: absolute;"></div>
+        <div id="Mapa" class="escondido" style=" background: #fff;
+            width: 530px;
+            height: 350px;
+            bottom: 708px;
+            left: 60px;
+            z-index: 2;
+            position: absolute;">
         </div>
+
 
     
     <script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="phaser.min.js"></script>
 	<script type="text/javascript" src="chat.js"></script>
 	<script type="text/javascript" src="jogo.js"></script>
+    <script type="text/javascript" src="inventario.js"></script>
     
 
     

@@ -174,46 +174,81 @@
             z-index: 0;
 		}
 
-        .itenstxt {
-            position: absolute;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 25px;
+
+        #divInventario {
             color: #fff;
-            background-position: top;
-            left: 90px;
+            background: #000;
+            width: 530px;
+            height: 350px;
+            bottom: 518px;
+            left: 60px;
+            z-index: 0;
+            padding: 0px;
+            margin: 30px auto;
+            position: relative;
+            display: none;
         }
 
-        .mapatxt {
-            position: absolute;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 25px;
-            color: #fff;
-            background-position: top;
-            left: 410px; 
+        .divInventario {
+            background: $color-container;
+            box-shadow:
+            /* Inner Background Color */
+              0   -6px 0  -2px transparent,
+              0    6px 0  -2px transparent,
+              0  -12px 0  -4px transparent,
+              0   12px 0  -4px transparent,
+              0  -18px 0  -8px transparent,
+              0   18px 0  -8px transparent,
+              0  -24px 0 -12px transparent,
+              0   24px 0 -12px transparent,
+            /* Inner Border */
+             -2px  0   0   0   #000,
+              2px  0   0   0   #000,
+              0   -4px 0   0   #000,
+              0    4px 0   0   #000,
+              0  -10px 0  -2px #000,
+              0   10px 0  -2px #000,
+              0  -14px 0  -4px #000,
+              0   14px 0  -4px #000,
+              0  -20px 0  -8px #000,
+              0   20px 0  -8px #000,
+              0  -26px 0 -12px #000,
+              0   26px 0 -12px #000,
+            /* Middle Border */
+             -4px  0   0   0   #000,
+              4px  0   0   0   #000,
+              0   -2px 0   2px #000,
+              0    2px 0   2px #000,
+              0   -8px 0   0px #000,
+              0    8px 0   0px #000,
+              0  -12px 0  -2px #000,
+              0   12px 0  -2px #000,
+              0  -16px 0  -4px #000,
+              0   16px 0  -4px #000,
+              0  -22px 0  -8px #000,
+              0   22px 0  -8px #000,
+              0  -28px 0 -12px #000,
+              0   28px 0 -12px #000,
+            /* Outer Border */
+             -6px  0   0   0   #fff,
+              6px  0   0   0   #fff,
+              0    0   0   4px #fff,
+              0   -6px 0   2px #fff,
+              0    6px 0   2px #fff,
+              0  -10px 0   0   #fff,
+              0   10px 0   0   #fff,
+              0  -14px 0  -2px #fff,
+              0   14px 0  -2px #fff,
+              0  -18px 0  -4px #fff,
+              0   18px 0  -4px #fff,
+              0  -24px 0  -8px #fff,
+              0   24px 0  -8px #fff,
+              0  -30px 0 -12px #fff,
+              0   30px 0 -12px #fff;
+
         }
 
-    /* width: 650px; height: 501px; position: absolute; bottom: 68px; background: #000; left: 370px; z-index: 0; */
-
-        .itens {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        height:  400px;
-        background: transparent;
-        width: 280px;
-        box-shadow:
-        0 0 0.1vw  0.4vw #fff7f7,   
-        0 0 0.4vw  0.6vw #e97272, 
-        0 0   4vw  0.4vw #e50b0b,
-        inset 0 0 1.5vw  0.4vw #e50b0b,
-        inset 0 0 0.4vw  0.2vw #e97272,
-        inset 0 0 0.5vw  0.2vw #fff7f7;
-        border-radius: 1rem;
-        }
-
-        .mapa {
-
-        }
+        
 
 		::-webkit-scrollbar {
 		width: 5px;
