@@ -12,16 +12,71 @@ var Mapa = document.getElementById("Mapa");
 
 
 var telas = [
-        "quarto"
+        "quartofred",      //0
+        "quartobilly",     //1
+        "restaurante",     //2
+        "casarachel",      //3
+        "garagem",         //4
+        "posto",           //5
+        "conveniencia",    //6
+        "floresta1",       //7
+        "floresta2",       //8
+        "floresta3",       //9
+        "gameover"         //10
 ];
 
 var telasAnteriores = [
-    0
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    5,
+    7,
+    8,
+    9,
+    10
 ];
 
 var telasPosteriores = [
-
+    1,
+    2,
+    3,
+    4,
+    6,
+    5,
+    7,
+    8,
+    9,
+    10
 ]; 
+
+ function fadeOutOk() {
+        fundo.kill();
+        telaAtual = telaDepoisDoFadeOut;
+        fundo = game.add.image(0, 0, telas[telaAtual]);
+        fundo.alpha = 0;
+        fundo.sendToBack();
+
+        game.add.tween(fundo).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeInOk, this);
+    }
+
+    function fadeInOk() {
+        botaoPodeClicar = true;
+    }
+
+    function acaoBotao() {
+        if (botaoPodeClicar == true) {
+                telaDepoisDoFadeOut = telasPosteriores[telaAtual];
+                if (telaAtual != telaDepoisDoFadeOut) {
+                    botaoPodeClicar = false;
+                    game.add.tween(fundo).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeOutOk, this);
+                    
+            }
+        }
+    }
+ 
 
 function itemEstaNoInventario(nomeItem) {
     return (nomeItem in inventario);
@@ -32,6 +87,8 @@ function adicionarAoInventario(nomeItem, urlImagem) {
         return;
     }
     var img = document.createElement("img");
+
+    img.height = 40;
     img.setAttribute("src", urlImagem);
     img.className = "imagem-inventario";
     img.onclick = function () { itemInventarioClicado(nomeItem); };
@@ -91,13 +148,28 @@ function TelaInicial(game) {
     this.preload = function () {
         game.load.crossOrigin = "anonymous";
         
-        game.load.image("quarto", "imagens/quarto.png");
         game.load.image("pc", "imagens/pc.png");
         game.load.image("fundopc", "imagens/fundopc.png");
         game.load.image("fechar", "imagens/fechar.png");
         game.load.image("mochila", "imagens/mochila.png");
+        game.load.image("chave", "imagens/chave.png");
+        game.load.image("quartofred","imagens/quartofred.png");
+        game.load.image("quartobilly","imagens/quartobilly.png");
+        game.load.image("restaurante","imagens/restaurante.png");
+        game.load.image("casarachel","imagens/casarachel.png");
+        game.load.image("garagem","imagens/garagem.png");
+        game.load.image("posto","imagens/posto.png");
+        game.load.image("conveniencia","imagens/conveniencia.png");
+        game.load.image("floresta1","imagens/floresta1.png");
+        game.load.image("floresta2","imagens/floresta2.png");
+        game.load.image("floresta3","imagens/floresta3.png");
+        game.load.image("gameover", "imagens/gameover.png");
+        game.load.image("botao", "imagens/botao.png");
+        
     }
 
+    
+    
     var tween = null;
     var popup; 
     
@@ -107,6 +179,13 @@ function TelaInicial(game) {
         
         fundo = game.add.image(0, 0, telas[telaAtual]);
         
+        var botao = game.add.image(720, 20, "botao");
+        botao.alpha = 1.0;
+        botao.inputEnabled = true;
+        botao.input.useHandCursor = true;
+        botao.events.onInputDown.add(acaoBotao);
+        
+        
         botao1 = game.add.image(355, 470, "pc");
         botao1.anchor.set(0.5);
         botao1.alpha = 1.0;
@@ -114,6 +193,7 @@ function TelaInicial(game) {
         botao1.input.useHandCursor = true;
         botao1.events.onInputDown.add(abrirPc, this);
         
+            
         
         function abrirPc() {
             
@@ -157,71 +237,31 @@ function TelaInicial(game) {
             inventario.anchor.set(0.5);
             inventario.alpha = 1.0;
             inventario.inputEnabled = true;
-            inventario.input.useHandCursor = true; 
+            inventario.input.useHandCursor = true;
             inventario.events.onInputDown.add(toggleDivInventario, this);
         }
         
         
-        abalinkItens.alpha = 1.0;
-        abalinkItens.inputEnabled = true;
-        abalinkItens.input.useHandCursor = true;
-        abalinkItens.events.onInputDown.add(abrirItens, this);      
-
-    
-        function abrirItens () {
-            if (Itens.className == "escondido") {
-                Itens.className = "";
-            } else {
-                Itens.className = "escondido";
-            }
-        }
-    
-        abalinkMapa.alpha = 1.0;
-        abalinkMapa.inputEnabled = true;
-        abalinkMapa.input.useHandCursor = true;
-        abalinkMapa.events.onInputDown.add(abrirMapa, this);      
-   
-    
-        function abrirMapa () {
-            if (Mapa.className == "escondido") {
-                Mapa.className = "";
-            } else {
-                Mapa.className = "escondido";
-            }
-        }
-       
+        var chave = game.add.image(250, 200, "chave");
+        chave.anchor.set(0.5);
+        chave.alpha = 1.0;
+        chave.inputEnabled = true;
+        chave.input.useHandCursor = true;
+        chave.events.onInputDown.add(() => {
+            if(botao2.alive){
+                
+            }else{
+                adicionarAoInventario("chave", "imagens/chave.png")
+                chave.kill();
+            } 
+        }, this);  
     }
         
     this.update = function () {
-
+        
     }
 
-    function fadeOutOk() {
-        fundo.kill();
-        telaAtual = telaDepoisDoFadeOut;
-        fundo = game.add.image(0, 0, telas[telaAtual]);
-        fundo.alpha = 0;
-        fundo.sendToBack();
-
-        game.add.tween(fundo).to({ alpha: 1 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeInOk, this);
-    }
-
-    function fadeInOk() {
-        botaoPodeClicar = true;
-    }
-
-    /*function acaoBotao1() {
-        if (botaoPodeClicar == true) {
-                telaDepoisDoFadeOut = telasPosteriores[telaAtual];
-                botao1.kill();
-                if (telaAtual != telaDepoisDoFadeOut) {
-                    botaoPodeClicar = false;
-                    game.add.tween(fundo).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeOutOk, this);
-                    
-            }
-        }
-    } */
- 
+   
 }
 
 
