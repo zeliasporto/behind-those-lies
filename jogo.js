@@ -3,13 +3,20 @@
 
 // Vamos chamar a variável de game, para ficar igual ao sandbox!
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "divJogo");
-var botao1, botao2, botao3, botao4, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
+var botao, botao1, botao2, botao3, botao4, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
     divInventario = document.getElementById("divInventario"), inventario = {};
-var abalinkItens = document.getElementById("abalinkItens");
+var abalinkItens = document.getElementById("abalinkItens"), img;
 var abalinkMapa = document.getElementById("abalinkMapa");
 var Itens = document.getElementById("Itens");
 var Mapa = document.getElementById("Mapa");
 
+WebFontConfig = {
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+    google: {
+      families: ['Revalia']
+    }
+
+};
 
 var telas = [
         "quartofred",      //0
@@ -69,6 +76,7 @@ var telasPosteriores = [
     function acaoBotao() {
         if (botaoPodeClicar == true) {
                 telaDepoisDoFadeOut = telasPosteriores[telaAtual];
+                botao.kill();
                 if (telaAtual != telaDepoisDoFadeOut) {
                     botaoPodeClicar = false;
                     game.add.tween(fundo).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true).onComplete.add(fadeOutOk, this);
@@ -86,8 +94,7 @@ function adicionarAoInventario(nomeItem, urlImagem) {
     if ((nomeItem in inventario)) {
         return;
     }
-    var img = document.createElement("img");
-
+    img = document.createElement("img");
     img.height = 40;
     img.setAttribute("src", urlImagem);
     img.className = "imagem-inventario";
@@ -114,8 +121,8 @@ function toggleDivInventario() {
 }
 
 function itemInventarioClicado(nomeItem) {
-    // @@@
-    alert(nomeItem);
+    img.className = "usavel";
+    toggleDivInventario();
 }
 
 function TelaInicial(game) {
@@ -148,6 +155,7 @@ function TelaInicial(game) {
     this.preload = function () {
         game.load.crossOrigin = "anonymous";
         
+        game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         game.load.image("pc", "imagens/pc.png");
         game.load.image("fundopc", "imagens/fundopc.png");
         game.load.image("fechar", "imagens/fechar.png");
@@ -165,10 +173,12 @@ function TelaInicial(game) {
         game.load.image("floresta3","imagens/floresta3.png");
         game.load.image("gameover", "imagens/gameover.png");
         game.load.image("botao", "imagens/botao.png");
+        game.load.image("dialogo", "imagens/dialogo.png");
+        game.load.image("porta", "imagens/porta.png");
+        game.load.image("portaAberta", "imagens/portaAberta.png");
         
     }
 
-    
     
     var tween = null;
     var popup; 
@@ -179,22 +189,13 @@ function TelaInicial(game) {
         
         fundo = game.add.image(0, 0, telas[telaAtual]);
         
-        var botao = game.add.image(720, 20, "botao");
-        botao.alpha = 1.0;
-        botao.inputEnabled = true;
-        botao.input.useHandCursor = true;
-        botao.events.onInputDown.add(acaoBotao);
-        
-        
         botao1 = game.add.image(355, 470, "pc");
         botao1.anchor.set(0.5);
         botao1.alpha = 1.0;
         botao1.inputEnabled = true;
         botao1.input.useHandCursor = true;
         botao1.events.onInputDown.add(abrirPc, this);
-        
-            
-        
+             
         function abrirPc() {
             
             popup = game.add.image(game.world.centerX, game.world.centerY, 'fundopc');
@@ -239,10 +240,13 @@ function TelaInicial(game) {
             inventario.inputEnabled = true;
             inventario.input.useHandCursor = true;
             inventario.events.onInputDown.add(toggleDivInventario, this);
+            
         }
         
         
         var chave = game.add.image(250, 200, "chave");
+        chave.height = 10;
+        chave.width = 25;
         chave.anchor.set(0.5);
         chave.alpha = 1.0;
         chave.inputEnabled = true;
@@ -255,12 +259,47 @@ function TelaInicial(game) {
                 chave.kill();
             } 
         }, this);  
+        
+        var dialogo = game.add.image(0, 500, "dialogo");
+        dialogo.alpha = 0.7;
+        
+        var porta = game.add.image(500, 100, "porta");
+        porta.anchor.set(0.5);
+        porta.alpha = 1.0;
+        porta.inputEnabled = true;
+        porta.input.useHandCursor = true;
+        porta.events.onInputDown.add(abrirPorta);
+        
+        function abrirPorta() {
+            if (chave.className = "usavel"){
+                porta.kill();
+                removerDoInventario("chave");
+                game.add.image(320, 0, "portaAberta");
+                botao = game.add.image(720, 20, "botao");
+                botao.alpha = 1.0;
+                botao.inputEnabled = true;
+                botao.input.useHandCursor = true;
+                botao.events.onInputDown.add(acaoBotao);
+                var outroitem = document.getElementById("outroitem");
+                outroitem.className = "ele";
+            }
+            
+        }
+        
     }
         
     this.update = function () {
         
     }
 
+    function createText() {
+
+    text = game.add.text(game.world.centerX, game.world.centerY, "- phaser -\nrocking with\ngoogle web fonts");
+    text.anchor.setTo(0.5);
+
+    text.font = 'Revalia';
+    text.fontSize = 60;
+    }
    
 }
 

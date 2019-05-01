@@ -50,7 +50,7 @@
 
 		<div class="input" id="input">
 			<div id="grupo1">
-				<button class="ind_button" onclick="clicar1a()" >ooi alex</button>
+				<button class="ind_button" onclick="clicar1a()" style="z-index: 1">ooi alex</button>
 				<button class="ind_button" onclick="clicar1b()">olá</button>
 			</div>
 			<div id="grupo2" class="escondido">
@@ -66,40 +66,35 @@
 				<button class="ind_button" onclick="clicar4b()">ja chego ai, blz?</button>
 			</div>
 		</div>
+    <div class="frases">
+        <p id="ele1" class="ele">ughh... eu não devia ter bebido tanto ontem...</p> 
+        <p id="ele2" class="ele">11:40... acho que ainda dá pra dormir mais-</p>
+        <p id="ele3-1" class="ele">espera, alex mandou mensagem?? a gente não se fala </p>
+        <p id="ele3-2" class="ele">há tanto tempo. vou ter que responder!</p> 
+        <p id="outroitem" class="escondido">hmm... isso não está certo</p>
+    </div>
     
-
-        <div id="divInventario" class="divInventario">
+        <div id="divInventario" class="borda" style="display: none">
           <p id="abalinkItens" class="abalink" style="
             float: left;
+            width: 530px;
+            height: 30px;                                          
             text-decoration: underline;
             border-color: transparent;
             font-family: 'Press Start 2P', cursive;
             font-size: 25px;
-            padding: 0px 0px;
             color: #fff;
             background-position: top;
-            left: 60px;
-            margin: 0 20px;
-            border-spacing: 20px;
+            left: 0px;
+            border-spacing: 10px;
             background: transparent;">Itens</p>
         </div> 
-
-        <div id="Itens" class="escondido" style=" background: #fff;
-            width: 530px;
-            height: 350px;
-            bottom: 708px;
-            left: 60px;
-            z-index: 1;
-            position: absolute;"></div>
-        <div id="Mapa" class="escondido" style=" background: #fff;
-            width: 530px;
-            height: 350px;
-            bottom: 708px;
-            left: 60px;
-            z-index: 2;
-            position: absolute;">
-        </div>
-
+    
+    
+        <div class="topEyelid"></div>
+        <div class="bottomEyelid"></div>
+    
+        
 
     
     <script type="text/javascript" src="jquery.js"></script>

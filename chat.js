@@ -1,6 +1,4 @@
-
-  
-  var ultimoGrupoMostrado = "grupo1";
+var ultimoGrupoMostrado = "grupo1";
   function mostrarGrupo(nomeDoGrupo) {
     if (ultimoGrupoMostrado) {
       document.getElementById(ultimoGrupoMostrado).className = "escondido";

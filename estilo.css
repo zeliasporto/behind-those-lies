@@ -1,4 +1,3 @@
-
 		body {
 			background: #000;
 			padding: 0;
@@ -6,12 +5,14 @@
 			color: #fff;
 			font: normal 14px sans-serif;
             cursor: url('imagens/cursor.png'), auto;
+            overflow: hidden;
+            top: 0;
 		}
 		
 		canvas {
 			display: block;
 			margin: 0 auto;
-		}
+        }
 
 		.fundo {
 			height: 600px;
@@ -26,23 +27,29 @@
 			right: -165px;
 		}
 
-
         #preto {
             position: absolute;
             right: 13px;
             bottom: 88px;
             width: 188px;
             height: 271px;
-            z-index: 1;
+            z-index: 2;
         }
 
-        #wallpaper {
+        #telabloqueada {
             position: absolute;
             right: 13px;
             bottom: 88px;
             width: 188px;
+            height: 271px;
+        }
+        #wallpaper {
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 188px;
 			height: 271px;
-            z-index: 1;
+            z-index: 2;
             cursor: url('imagens/cursor-click.png'), auto;
         }
 
@@ -63,9 +70,9 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 35px;
             color: #fff;
-            right: 17px;
-			bottom: 265px;
-            z-index: 1;
+            right: 6px;
+			bottom: 175px;
+            z-index: 2;
             cursor: url('imagens/cursor-click.png'), auto;
         }
 
@@ -74,9 +81,9 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
             color: #fff;
-            right: 140px;
-			bottom: 215px;
-            z-index: 1;
+            left: 20px;
+			bottom: 125px;
+            z-index: 2;
             cursor: url('imagens/cursor-click.png'), auto;
         }
 
@@ -85,9 +92,9 @@
             font-family: 'Press Start 2P', cursive;
             font-size: 10px;
             color: #fff;
-            left: 1095px;
-			bottom: 200px;
-            z-index: 1;
+            left: 20px;
+			bottom: 110px;
+            z-index: 2;
             cursor: url('imagens/cursor-click.png'), auto;
         }
 
@@ -101,7 +108,7 @@
 			color: white;
 			font-family: 'Press Start 2P', cursive;
             font-size: 9px;
-            z-index: 0;
+            z-index: 1;
 		}
 
 		.input {
@@ -120,6 +127,10 @@
 			display: none;
 		}
 
+        .visivel {
+            display: block;
+        }
+
 		.ind_button {
 			font-family: 'Press Start 2P', cursive;
             font-size: 6px;
@@ -130,7 +141,7 @@
 			float: left;
 			margin-left: 0px;
 			cursor: pointer;
-			z-index: 0;
+			z-index: 1;
             cursor: url('imagens/cursor-click.png'), auto;
 		}
 
@@ -156,8 +167,6 @@
 			bottom: -2.5px;
             z-index: 0;
 		}
-
-
 
 		.msgalex {
 			position: relative;
@@ -185,16 +194,19 @@
             background: #000;
             width: 530px;
             height: 350px;
+            border-left: inset 30px;
+            border-right: inset 30px;
+            border-bottom: inset 30px;
+            border-color: transparent;
             bottom: 518px;
             left: 60px;
             z-index: 0;
             padding: 0px;
             margin: 30px auto;
             position: relative;
-            display: none;
         }
 
-        .divInventario {
+        .borda {
             background: $color-container;
             box-shadow:
             /* Inner Background Color */
@@ -253,8 +265,115 @@
 
         }
 
-		::-webkit-scrollbar {
-		width: 5px;
+
+.topEyelid {
+    height: 300px;
+    left: 240px;
+    width: 800px;
+    position: relative;
+    background-color: #000;
+    bottom: 600px;
+    z-index: 2;
+    animation-name: sobe;
+    animation-duration: 4s;
+    animation-fill-mode:forwards;
+    animation-delay: 2s;
+}
+.bottomEyelid {
+    overflow: visible;
+    width: 800px;
+    height: 300px;
+    position: absolute;
+    bottom: 10px;
+    left: 240px;
+    background-color: #000;
+    z-index: 2;
+    animation-name: desce;
+    animation-duration: 4s; 
+    animation-fill-mode:forwards;
+    animation-delay: 2s;
+}
+
+@keyframes sobe {
+  0%   {left:240px; bottom:600px; z-index:  2}
+  35%  {left:240px; bottom:800px; z-index:  2} 
+  70%  {left:240px; bottom:600px; z-index:  2}
+  95%  {left:240px; bottom:900px; z-index:  2}  
+  100% {left:240px; bottom:900px; z-index: -1}
+}
+
+@keyframes desce {
+  0%   {left:240px; bottom: 010px; z-index:  2}
+  35%  {left:240px; bottom:-210px; z-index:  2}
+  70%  {left:240px; bottom: 010px; z-index:  2}
+  95%  {left:240px; bottom:-310px; z-index:  2}
+  100% {left:240px; bottom:-310px; z-index: -1}
+}
+
+.ele {
+        color: white;
+        overflow: hidden;
+        position: absolute;
+		font-family: 'Press Start 2P', cursive;
+        font-size: 10px;
+        white-space: nowrap;
+        padding: 10px;
+        left: calc(50% - 450px / 2);
+}
+
+#ele1 {
+    animation: typing 4s steps(60, end);
+    animation-delay: 6s;
+    animation-fill-mode: both;
+    vertical-align: middle;
+}
+
+#ele2 {
+    animation: typing 4s steps(60, end);
+    animation-delay: 10s;
+    animation-fill-mode: both;
+    vertical-align: middle;
+}
+
+#ele3-1 {
+    animation: typing-continua 8s steps(80, end);
+    animation-delay: 14s;
+    animation-fill-mode: both;
+    bottom: 60px;
+}
+
+#ele3-2 {
+    animation: typing-continuado 4s steps(80, end);
+    animation-delay: 18s;
+    animation-fill-mode: both;
+    bottom: 50px;
+}
+
+@keyframes typing {
+    0%      {width: 0px  ;bottom:-100px;}
+    0.01%   {width: 0px  ;bottom: 50px ;}
+    99.99%  {width: 500px;bottom: 50px ;}
+    100%    {width: 500px;bottom:-100px;}
+}
+
+@keyframes typing-continua {
+    0%      {width: 0px  ;bottom:-100px;}
+    0.01%   {width: 0px  ;bottom: 50px ;}
+    50%     {width: 500px;bottom: 50px ;}
+    99.99%  {width: 500px;bottom: 50px ;}
+    100%    {width: 500px;bottom:-100px;}
+}
+
+@keyframes typing-continuado {
+    0%      {width: 0px  ;bottom:-100px;}
+    0.01%   {width: 0px  ;bottom: 30px ;}
+    99.99%  {width: 500px;bottom: 30px ;}
+    100%    {width: 500px;bottom:-100px;}
+}
+
+
+        ::-webkit-scrollbar {
+        width: 5px;
 		}
 
 		::-webkit-scrollbar-track {
