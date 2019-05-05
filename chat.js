@@ -73,7 +73,13 @@ var ultimoGrupoMostrado = "grupo1";
     setTimeout(function () {scroll()}, 500)
     setTimeout(function () {scroll()}, 2000)
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 3500) 
-  }
+    setTimeout(function () {mudarTexto([
+        "antes de sair eu preciso pegar minha mochila, nunca se sabe \n\ que tipo de coisa vou precisar quardar",
+        " "
+        ], 50);
+    }, 4000);  
+  }  
+  
 
   function clicar4b() {
     setTimeout(function () {document.getElementById("4b").style.display = "block" }, 500)
@@ -82,5 +88,11 @@ var ultimoGrupoMostrado = "grupo1";
     setTimeout(function () {scroll()}, 500)
     setTimeout(function () {scroll()}, 2000)
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 3500) 
+    setTimeout(function () {mudarTexto([
+        "antes de sair eu preciso pegar minha mochila, nunca se sabe \n\ que tipo de coisa vou precisar quardar",
+        " "
+        ], 50);
+    }, 4000);  
   }
+
 

@@ -9,7 +9,7 @@
 		content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
 	<title>Meu Joguinho</title>
 	<link rel="stylesheet" type="text/css" href="estilo.css" />
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
 	<script type="text/javascript" src="jquery.js"></script>
 	
 </head>
@@ -47,33 +47,26 @@
 			<img src="imagens/alex.png" class="imagem">
 			<div id="texto"> Alex </div>
 		</div>
-
-		<div class="input" id="input">
+		<div>
+            <img src="imagens/input.png" class="input" id="input">
 			<div id="grupo1">
-				<button class="ind_button" onclick="clicar1a()" style="z-index: 1">ooi alex</button>
-				<button class="ind_button" onclick="clicar1b()">olá</button>
+				<button class="left_button" onclick="clicar1a()" style="z-index: 1">ooi alex</button>
+				<button class="right_button" onclick="clicar1b()">olá</button>
 			</div>
 			<div id="grupo2" class="escondido">
-				<button class="ind_button" onclick="clicar2a()">ontem foi louco!</button>
-				<button class="ind_button" onclick="clicar2b()">não o vi...</button>
+				<button class="left_button" onclick="clicar2a()">ontem foi louco!</button>
+				<button class="right_button" onclick="clicar2b()">não o vi...</button>
 			</div>
 			<div id="grupo3" class="escondido">
-				<button class="ind_button" onclick="clicar3a()">falou com ela?</button>
-				<button class="ind_button" onclick="clicar3b()">ela gosta de vc...</button>
+				<button class="left_button" onclick="clicar3a()">falou com ela?</button>
+				<button class="right_button" onclick="clicar3b()">ela sempre gostou de vc ne</button>
 			</div>
 			<div id="grupo4" class="escondido">
-				<button class="ind_button" onclick="clicar4a()">estou indo</button>
-				<button class="ind_button" onclick="clicar4b()">ja chego ai, blz?</button>
+				<button class="left_button" onclick="clicar4a()">estou indo</button>
+				<button class="right_button" onclick="clicar4b()">ja chego ai, blz?</button>
 			</div>
 		</div>
-    <div class="frases">
-        <p id="ele1" class="ele">ughh... eu não devia ter bebido tanto ontem...</p> 
-        <p id="ele2" class="ele">11:40... acho que ainda dá pra dormir mais-</p>
-        <p id="ele3-1" class="ele">espera, alex mandou mensagem?? a gente não se fala </p>
-        <p id="ele3-2" class="ele">há tanto tempo. vou ter que responder!</p> 
-        <p id="outroitem" class="escondido">hmm... isso não está certo</p>
-    </div>
-    
+        <div id="frases"></div>
         <div id="divInventario" class="borda" style="display: none">
           <p id="abalinkItens" class="abalink" style="
             float: left;
@@ -90,19 +83,14 @@
             background: transparent;">Itens</p>
         </div> 
     
-    
         <div class="topEyelid"></div>
         <div class="bottomEyelid"></div>
-    
-        
-
-    
+       
     <script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="phaser.min.js"></script>
 	<script type="text/javascript" src="chat.js"></script>
 	<script type="text/javascript" src="jogo.js"></script>
-    
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
     
 </body>
 
