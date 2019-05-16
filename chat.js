@@ -1,4 +1,5 @@
 var ultimoGrupoMostrado = "grupo1";
+var clicando = false;
   function mostrarGrupo(nomeDoGrupo) {
     if (ultimoGrupoMostrado) {
       document.getElementById(ultimoGrupoMostrado).className = "escondido";
@@ -7,9 +8,8 @@ var ultimoGrupoMostrado = "grupo1";
     ultimoGrupoMostrado = nomeDoGrupo;
   }
     
-    function desbloquear () {
+    function desbloquear() {
     document.getElementById("telabloqueada").className = "escondido";
-    document.getElementById("msg1").style.display = "block";
     }
 
   function scroll(){
@@ -18,12 +18,15 @@ var ultimoGrupoMostrado = "grupo1";
   }
 
   function clicar1a() {
+    if (clicando === true) {
+        return;
+    }
+    clicando = true;
     setTimeout(function () {document.getElementById("1a").style.display = "block" }, 500)
     setTimeout(function () {document.getElementById("msg2").style.display = "block" }, 2000)
-    setTimeout(function () {mostrarGrupo("grupo2")}, 2500)
+    setTimeout(function () {mostrarGrupo("grupo2"); clicando = false;}, 2500)
     setTimeout(function () {scroll()}, 500)
     setTimeout(function () {scroll()}, 2000)
-    
   }
 
   function clicar1b() {
@@ -74,10 +77,16 @@ var ultimoGrupoMostrado = "grupo1";
     setTimeout(function () {scroll()}, 2000)
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 3500) 
     setTimeout(function () {mudarTexto([
-        "antes de sair eu preciso pegar minha mochila, nunca se sabe \n\ que tipo de coisa vou precisar quardar",
+        "Acho bom pegar minha mochila, pode ser útil",
         " "
-        ], 50);
+        ], 50, 800);
     }, 4000);  
+    setTimeout(function () {scroll()}, 5100);  
+    setTimeout(function () {document.getElementById("msg6").style.display = "block";}, 5150);
+    setTimeout(function () {scroll()}, 5000);
+    setTimeout(function () {document.getElementById("msg7").style.display = "block";}, 5200);
+    setTimeout(function () {scroll()}, 5250);
+    setTimeout(function () {mostrarGrupo("grupo7")}, 5300)
   }  
   
 
@@ -89,10 +98,87 @@ var ultimoGrupoMostrado = "grupo1";
     setTimeout(function () {scroll()}, 2000)
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 3500) 
     setTimeout(function () {mudarTexto([
-        "antes de sair eu preciso pegar minha mochila, nunca se sabe \n\ que tipo de coisa vou precisar quardar",
+        "Acho bom pegar minha mochila, pode ser útil",
         " "
-        ], 50);
+        ], 50, 800);
     }, 4000);  
+    setTimeout(function () {scroll()}, 5100);  
+    setTimeout(function () {document.getElementById("msg6").style.display = "block";}, 5150);
+    setTimeout(function () {scroll()}, 5200);
+    setTimeout(function () {document.getElementById("msg7").style.display = "block";}, 5250);
+    setTimeout(function () {scroll()}, 5300);
+    setTimeout(function () {mostrarGrupo("grupo7")}, 5350)  
   }
 
+function clicar7a() {
+    setTimeout(function () {document.getElementById("7a").style.display = "block" }, 500) 
+    setTimeout(function () {document.getElementById("grupo7").className = "escondido"}, 1500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {scroll()}, 1500)
+    setTimeout(function () {mudarTexto([
+        "Já cheguei aqui, não vou perder meu dia. Vou ver se encontro \n\ algo importante aqui",
+        " "
+        ], 50, 800);
+    }, 2500);  
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000)
+    setTimeout(function () {scroll()}, 5100);  
+    setTimeout(function () {document.getElementById("msg8").style.display = "block";}, 5150);
+    setTimeout(function () {scroll()}, 5000);
+    setTimeout(function () {mostrarGrupo("grupo8")}, 5300)
+    
+}
 
+function clicar7b() {
+    setTimeout(function () {document.getElementById("7b").style.display = "block" }, 500)
+    setTimeout(function () {document.getElementById("grupo7").className = "escondido"}, 1500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {scroll()}, 1500)
+    setTimeout(function () {mudarTexto([
+        "Já cheguei aqui, não vou perder meu dia. Vou ver se encontro \n\ algo importante aqui",
+        " "
+        ], 50, 800);
+    }, 2500);  
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
+    setTimeout(function () {scroll()}, 5100);  
+    setTimeout(function () {document.getElementById("msg8").style.display = "block"}, 3000);
+    setTimeout(function () {scroll()}, 3500);
+    setTimeout(function () {mostrarGrupo("grupo8")}, 3500);
+}
+
+function clicar8a() {
+    setTimeout(function () {document.getElementById("8a").style.display = "block" }, 500)
+    setTimeout(function () {document.getElementById("9a").style.display = "block" }, 1500)
+    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 3000)
+    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 4500)
+    setTimeout(function () {mostrarGrupo("grupo11")}, 6500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {scroll()}, 1500)
+    setTimeout(function () {scroll()}, 3000)
+    setTimeout(function () {scroll()}, 4500)
+  }
+
+function clicar8b() {
+    setTimeout(function () {document.getElementById("8b").style.display = "block" }, 500)
+    setTimeout(function () {document.getElementById("9b").style.display = "block" }, 1500)
+    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 3000)
+    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 4500)
+    setTimeout(function () {mostrarGrupo("grupo11")}, 6500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {scroll()}, 1500)
+    setTimeout(function () {scroll()}, 3000)
+    setTimeout(function () {scroll()}, 4500)
+  }
+
+function clicar11a() {
+    setTimeout(function () {document.getElementById("11a").style.display = "block" }, 500)
+    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 1500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
+  }
+
+function clicar11b() {
+    setTimeout(function () {document.getElementById("11b").style.display = "block" }, 500)
+    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 1500)
+    setTimeout(function () {scroll()}, 500)
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
+  }

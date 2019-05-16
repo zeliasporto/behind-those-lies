@@ -17,15 +17,16 @@
 <body>
 
 	<div id="divJogo"></div>
+    <img id="imgMochila" src="imagens/mochila.png" style="display: none; position: absolute; left: 240px; top: 420px;" onclick="toggleDivInventario()" />
 	<div>	
 		<img src="imagens/celular.png" class=celular>
 	</div> 
     <div id="preto" class="escondido"><img src="imagens/preto.jpg"></div>
     <div id="telabloqueada">
-        <button onclick="desbloquear()"><img src="imagens/wallpaper.png" id="wallpaper"></button>
-        <p class="horas" id="11h">11:40</p>
-        <p class="remetente" id="alex">Alex</p>
-        <p class="conteudo" id="oiFred">Oi Fred</p>
+        <img src="imagens/wallpaper.png" id="wallpaper">
+        <p id="horas" >11:40</p>
+        <p id="remetente" >Alex</p>
+        <button id="conteudo" onclick="desbloquear()">Oi Fred</button>
     </div>
 	<div class="fundo-chat" id="chat">
 			<img src="imagens/msg1.png" class="msgalex" id="msg1">
@@ -41,6 +42,19 @@
 			<img src="imagens/4a.png" class="msgfred" id="4a">
 			<img src="imagens/4b.png" class="msgfred" id="4b">
 			<img src="imagens/msg5.png" class="msgalex" id="msg5">	
+            <img src="imagens/msg6.png" class="msgalex" id="msg6">
+            <img src="imagens/msg7.png" class="msgalex" id="msg7">	
+            <img src="imagens/7a.png" class="msgfred" id="7a">
+			<img src="imagens/7b.png" class="msgfred" id="7b">
+            <img src="imagens/msg8.png" class="msgalex" id="msg8">	
+            <img src="imagens/8a.png" class="msgfred" id="8a">
+			<img src="imagens/8b.png" class="msgfred" id="8b">
+            <img src="imagens/9a.png" class="msgfred" id="9a">
+			<img src="imagens/9b.png" class="msgfred" id="9b">
+            <img src="imagens/msg10.png" class="msgalex" id="msg10">	
+            <img src="imagens/msg11.png" class="msgalex" id="msg11">	
+            <img src="imagens/11a.png" class="msgfred" id="11a">
+			<img src="imagens/11b.png" class="msgfred" id="11b">
 		<div class="ultimamsg"></div>		
 	</div>
 		<div class="contato" id="contato">
@@ -65,10 +79,23 @@
 				<button class="left_button" onclick="clicar4a()">estou indo</button>
 				<button class="right_button" onclick="clicar4b()">ja chego ai, blz?</button>
 			</div>
+            <div id="grupo7" class="escondido">
+				<button class="left_button" onclick="clicar7a()">vacilo...</button>
+				<button class="right_button" onclick="clicar7b()">eu me viro</button>
+			</div>
+            <div id="grupo8" class="escondido">
+				<button class="left_button" onclick="clicar8a()">fui pra garagem</button>
+				<button class="right_button" onclick="clicar8b()">descobri</button>
+			</div>
+            <div id="grupo11" class="escondido">
+				<button class="left_button" onclick="clicar11a()">vou lá</button>
+				<button class="right_button" onclick="clicar11b()">obrigado</button>
+			</div>
 		</div>
+
         <div id="frases"></div>
         <div id="divInventario" class="borda" style="display: none">
-          <p id="abalinkItens" class="abalink" style="
+          <p id="ablinkItens" class="abalink" style="
             float: left;
             width: 530px;
             height: 30px;                                          
@@ -85,7 +112,40 @@
     
         <div class="topEyelid"></div>
         <div class="bottomEyelid"></div>
-       
+    
+    <div id="fundopc" class="borda" style="display: none">
+        <img id="fb" src="imagens/fundopc.png">
+        <button id="esqueceusenha" onclick="esqueceu()">esqueceu a senha?</button>
+        <div id="puzzleSenha" name="puzzleSenha" class="escondido"> 
+            <img id="esqueceu" src="imagens/esqueceu.png">
+            <p id="pergunta">Responda à sua pergunta de segurança</p>
+            <p id="filme">Qual o meu filme favorito?</p>
+            <p id="invalido" class="escondido">senha inválida</p>
+            <input type="text" id="inputSenha" />
+            <input type="image" src="imagens/enviar.png" value="Enviar" id="buttonSenha" />
+        </div>
+        <img id="post" src="imagens/post.png" class="escondido">
+    </div>  
+    
+    <div id="puzzle" class="borda" style="display: none">
+        <div id="baixo">
+            <img class="pecasantes"src="imagens/inicio.png" id="inicio" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes"src="imagens/curvabaixo.png" id="curvabaixo" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes"src="imagens/curvacima.png" id="curvacima" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes"src="imagens/reto.png" id="reto" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes"src="imagens/fim.png" id="fim" draggable="true" ondragstart="drag(event)">
+        </div> 
+        <div id="peca1a" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca1b" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca1c" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca2a" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca2b" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca2c" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca3a" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca3b" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id="peca3c" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+    
     <script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="phaser.min.js"></script>
 	<script type="text/javascript" src="chat.js"></script>

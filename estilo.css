@@ -4,7 +4,7 @@ body {
     margin: 0;
     color: #fff;
     font: normal 14px sans-serif;
-    cursor: url('imagens/cursor.png'), auto;
+    cursor: url('imagens/cursor.png'), auto;       
 }
 
 canvas {
@@ -58,12 +58,13 @@ canvas {
     width: 188px;
     height: 201px;
     background-color: rgba(195, 230, 222, 0.938);
-    overflow-y: auto;
-    overflow-x: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    white-space: nowrap;
     z-index: 0;
 }
 
-.horas {
+#horas {
     position: absolute;
     font-family: 'Press Start 2P', cursive;
     font-size: 35px;
@@ -74,7 +75,7 @@ canvas {
     cursor: url('imagens/cursor-click.png'), auto;
 }
 
-.remetente {
+#remetente {
     position: absolute;
     font-family: 'Press Start 2P', cursive;
     font-size: 10px;
@@ -85,18 +86,21 @@ canvas {
     cursor: url('imagens/cursor-click.png'), auto;
 }
 
-.conteudo {
+#conteudo {
     position: absolute;
     font-family: 'Press Start 2P', cursive;
+    background: transparent;
+    border-color: transparent;
     font-size: 10px;
     color: #fff;
-    left: 20px;
-    bottom: 110px;
+    text-align: left;
+    left: 13px;
+    top: 137px;
     z-index: 2;
     cursor: url('imagens/cursor-click.png'), auto;
 }
 
-.contato {
+#contato {
     position: absolute;
     right: 13px;
     bottom: 324px;
@@ -187,7 +191,7 @@ canvas {
     margin-top: 5px;
     display: none;
     clear: both;
-    z-index: 0;			
+    z-index: 0;	
 }
 
 .msgfred {
@@ -200,6 +204,130 @@ canvas {
     z-index: 0;
 }
 
+#fundopc {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    
+}
+
+#fb {
+    bottom: -10px;
+    vertical-align: middle;
+    left: 30px;
+    position: absolute;
+}
+
+#esqueceu {
+    bottom: -10px;
+    vertical-align: middle;
+    left: 30px;
+    position: absolute;
+}
+
+#esqueceusenha {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    background: transparent;
+    border-color: transparent;
+    font-size: 6px;
+    color: #fff;
+    bottom: 265px;
+    left: 313px;
+}
+
+#esqueceusenha:hover {
+    cursor: url('imagens/cursor-click.png'), auto;
+}
+
+#pergunta {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    bottom: 207px;
+    left: 158px;
+    position: absolute;
+    color: #9e96a8;
+}
+
+#filme {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    bottom: 197px;
+    left: 158px;
+    position: absolute;
+    color: #9e96a8;
+}
+
+#buttonSenha {
+    bottom: 173px;
+    left: 310px;
+    height: 10px;
+    position: absolute;
+}
+
+#buttonSenha:hover {
+    cursor: url('imagens/cursor-click.png'), auto;
+}
+
+#inputSenha {
+    position: absolute;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    color: #3e3e3e;
+    bottom: 170px;
+    left: 196px;
+    width: 105px;
+    height: 10px;
+    border-width: 2px;  
+    border-style: outset;
+}
+
+#post {
+    bottom: -10px;
+    vertical-align: middle;
+    left: 30px;
+    position: absolute;
+}
+
+#invalido {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 6px;
+    bottom: 156px;
+    left: 196px;
+    position: absolute;
+    color: darkred;
+}
+
+/* .imgInventario:hover {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -o-transform: scale(2);
+    -ms-transform: scale(2);
+    transform: scale(2); 
+    
+    width: 530px;
+    height: 300px;
+    left: 390px;
+    top: 450px;
+} */
+
+#fechar {
+    left: 340px;
+    top: 5px;
+}
 
 #divInventario {
     color: #fff;
@@ -210,13 +338,31 @@ canvas {
     border-right: inset 30px;
     border-bottom: inset 30px;
     border-color: transparent;
-    bottom: 518px;
-    left: 60px;
-    z-index: 0;
+    bottom: 150px;
+    left: 390px;
+    z-index: 1;
     padding: 0px;
-    margin: 30px auto;
-    position: relative;
+    margin: 0px auto;
+    position: absolute;
 }
+
+#divInpecionar {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 1;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+}
+
 
 .borda {
     background: $color-container;
@@ -273,7 +419,7 @@ canvas {
       0  -24px 0  -8px #fff,
       0   24px 0  -8px #fff,
       0  -30px 0 -12px #fff,
-      0   300px 0 -12px #fff;
+      0   30px 0 -12px #fff;
 }
 
 .topEyelid {
@@ -330,6 +476,103 @@ canvas {
     height: 100px;
     white-space: pre-line;
 }
+
+#puzzle {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+    text-align: center;
+}
+
+#baixo {
+    position: absolute;
+    left: 4px;
+    width: 520px;
+    height: 80px;
+    bottom: -27px;
+    z-index: 1;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.pecasantes {
+    height: 75px;
+    width: 135px;
+    left: -22px;
+    display: inline-block;
+}
+
+.pecas {
+    position: absolute;
+    height: 75px;
+    z-index: 1;
+    width: 135px;
+    background: #fff;
+    border: inset;
+}
+
+.pecas:hover {
+    cursor: url('imagens/cursor-click.png'), auto; 
+}
+
+#peca1a {
+    left:62.5px;
+    bottom: 229px;
+}
+
+#peca1b {
+    left:197.5px;
+    bottom: 229px;
+    
+}
+
+#peca1c {
+    left:332.5px;
+    bottom: 229px;
+}
+
+#peca2a {
+    left:62.5px;
+    bottom: 149px;
+}
+
+#peca2b {
+    left:197.5px;
+    bottom: 149px;
+}
+
+#peca2c {
+    left:332.5px;
+    bottom: 149px;
+}
+
+#peca3a {
+    left:62.5px;
+    bottom: 70px;
+}
+
+#peca3b {
+    left:197.5px;
+    bottom: 70px;
+}
+
+#peca3c {
+    left:332.5px;
+    bottom: 70px;
+}
+
 
 ::-webkit-scrollbar {
     width: 5px;
