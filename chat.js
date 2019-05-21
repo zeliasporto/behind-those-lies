@@ -121,10 +121,9 @@ function clicar7a() {
         ], 50, 800);
     }, 2500);  
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000)
-    setTimeout(function () {scroll()}, 5100);  
-    setTimeout(function () {document.getElementById("msg8").style.display = "block";}, 5150);
-    setTimeout(function () {scroll()}, 5000);
-    setTimeout(function () {mostrarGrupo("grupo8")}, 5300)
+    setTimeout(function () {document.getElementById("msg8").style.display = "block";}, 5000);
+    setTimeout(function () {scroll()}, 5050);
+    setTimeout(function () {mostrarGrupo("grupo8")}, 5100)
     
 }
 
@@ -139,46 +138,47 @@ function clicar7b() {
         ], 50, 800);
     }, 2500);  
     setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
-    setTimeout(function () {scroll()}, 5100);  
-    setTimeout(function () {document.getElementById("msg8").style.display = "block"}, 3000);
-    setTimeout(function () {scroll()}, 3500);
-    setTimeout(function () {mostrarGrupo("grupo8")}, 3500);
+    setTimeout(function () {document.getElementById("msg8").style.display = "block"}, 5000);
+    setTimeout(function () {scroll()}, 5050);
+    setTimeout(function () {mostrarGrupo("grupo8")}, 5100);
 }
 
 function clicar8a() {
     setTimeout(function () {document.getElementById("8a").style.display = "block" }, 500)
-    setTimeout(function () {document.getElementById("9a").style.display = "block" }, 1500)
-    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 3000)
-    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 4500)
-    setTimeout(function () {mostrarGrupo("grupo11")}, 6500)
+    setTimeout(function () {document.getElementById("9a").style.display = "block" }, 3000)
+    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 5500)
+    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 8000)
+    setTimeout(function () {mostrarGrupo("grupo11")}, 9500)
     setTimeout(function () {scroll()}, 500)
-    setTimeout(function () {scroll()}, 1500)
     setTimeout(function () {scroll()}, 3000)
-    setTimeout(function () {scroll()}, 4500)
+    setTimeout(function () {scroll()}, 5500)
+    setTimeout(function () {scroll()}, 8000)
   }
 
 function clicar8b() {
     setTimeout(function () {document.getElementById("8b").style.display = "block" }, 500)
-    setTimeout(function () {document.getElementById("9b").style.display = "block" }, 1500)
-    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 3000)
-    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 4500)
-    setTimeout(function () {mostrarGrupo("grupo11")}, 6500)
+    setTimeout(function () {document.getElementById("9b").style.display = "block" }, 3000)
+    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 5500)
+    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 8000)
+    setTimeout(function () {mostrarGrupo("grupo11")}, 9500)
     setTimeout(function () {scroll()}, 500)
-    setTimeout(function () {scroll()}, 1500)
     setTimeout(function () {scroll()}, 3000)
-    setTimeout(function () {scroll()}, 4500)
+    setTimeout(function () {scroll()}, 5500)
+    setTimeout(function () {scroll()}, 8000)
   }
 
 function clicar11a() {
     setTimeout(function () {document.getElementById("11a").style.display = "block" }, 500)
-    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 1500)
+    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 3000)
     setTimeout(function () {scroll()}, 500)
-    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 4500)
+    setTimeout(function () {proximo5()}, 5000)
   }
 
 function clicar11b() {
     setTimeout(function () {document.getElementById("11b").style.display = "block" }, 500)
-    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 1500)
+    setTimeout(function () {document.getElementById("grupo11").className = "escondido"}, 3000)
     setTimeout(function () {scroll()}, 500)
-    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 2000) 
+    setTimeout(function () {document.getElementById("preto").style.display = "block" }, 4500) 
+    setTimeout(function () {proximo5()}, 5000)
   }

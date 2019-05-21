@@ -4,7 +4,7 @@ body {
     margin: 0;
     color: #fff;
     font: normal 14px sans-serif;
-    cursor: url('imagens/cursor.png'), auto;       
+    cursor: url('imagens/cursor.png'), auto;
 }
 
 canvas {
@@ -41,6 +41,7 @@ canvas {
     width: 188px;
     height: 271px;
 }
+
 #wallpaper {
     position: absolute;
     right: 0px;
@@ -191,7 +192,7 @@ canvas {
     margin-top: 5px;
     display: none;
     clear: both;
-    z-index: 0;	
+    z-index: 0;
 }
 
 .msgfred {
@@ -221,7 +222,7 @@ canvas {
     position: absolute;
     overflow: hidden;
     text-align: center;
-    
+
 }
 
 #fb {
@@ -291,7 +292,7 @@ canvas {
     left: 196px;
     width: 105px;
     height: 10px;
-    border-width: 2px;  
+    border-width: 2px;
     border-style: outset;
 }
 
@@ -367,59 +368,59 @@ canvas {
 .borda {
     background: $color-container;
     box-shadow:
-    /* Inner Background Color */
-      0   -6px 0  -2px transparent,
-      0    6px 0  -2px transparent,
-      0  -12px 0  -4px transparent,
-      0   12px 0  -4px transparent,
-      0  -18px 0  -8px transparent,
-      0   18px 0  -8px transparent,
-      0  -24px 0 -12px transparent,
-      0   24px 0 -12px transparent,
-    /* Inner Border */
-     -2px  0   0   0   #000,
-      2px  0   0   0   #000,
-      0   -4px 0   0   #000,
-      0    4px 0   0   #000,
-      0  -10px 0  -2px #000,
-      0   10px 0  -2px #000,
-      0  -14px 0  -4px #000,
-      0   14px 0  -4px #000,
-      0  -20px 0  -8px #000,
-      0   20px 0  -8px #000,
-      0  -26px 0 -12px #000,
-      0   26px 0 -12px #000,
-    /* Middle Border */
-     -4px  0   0   0   #000,
-      4px  0   0   0   #000,
-      0   -2px 0   2px #000,
-      0    2px 0   2px #000,
-      0   -8px 0   0px #000,
-      0    8px 0   0px #000,
-      0  -12px 0  -2px #000,
-      0   12px 0  -2px #000,
-      0  -16px 0  -4px #000,
-      0   16px 0  -4px #000,
-      0  -22px 0  -8px #000,
-      0   22px 0  -8px #000,
-      0  -28px 0 -12px #000,
-      0   28px 0 -12px #000,
-    /* Outer Border */
-     -6px  0   0   0   #fff,
-      6px  0   0   0   #fff,
-      0    0   0   4px #fff,
-      0   -6px 0   2px #fff,
-      0    6px 0   2px #fff,
-      0  -10px 0   0   #fff,
-      0   10px 0   0   #fff,
-      0  -14px 0  -2px #fff,
-      0   14px 0  -2px #fff,
-      0  -18px 0  -4px #fff,
-      0   18px 0  -4px #fff,
-      0  -24px 0  -8px #fff,
-      0   24px 0  -8px #fff,
-      0  -30px 0 -12px #fff,
-      0   30px 0 -12px #fff;
+        /* Inner Background Color */
+        0 -6px 0 -2px transparent,
+        0 6px 0 -2px transparent,
+        0 -12px 0 -4px transparent,
+        0 12px 0 -4px transparent,
+        0 -18px 0 -8px transparent,
+        0 18px 0 -8px transparent,
+        0 -24px 0 -12px transparent,
+        0 24px 0 -12px transparent,
+        /* Inner Border */
+        -2px 0 0 0 #000,
+        2px 0 0 0 #000,
+        0 -4px 0 0 #000,
+        0 4px 0 0 #000,
+        0 -10px 0 -2px #000,
+        0 10px 0 -2px #000,
+        0 -14px 0 -4px #000,
+        0 14px 0 -4px #000,
+        0 -20px 0 -8px #000,
+        0 20px 0 -8px #000,
+        0 -26px 0 -12px #000,
+        0 26px 0 -12px #000,
+        /* Middle Border */
+        -4px 0 0 0 #000,
+        4px 0 0 0 #000,
+        0 -2px 0 2px #000,
+        0 2px 0 2px #000,
+        0 -8px 0 0px #000,
+        0 8px 0 0px #000,
+        0 -12px 0 -2px #000,
+        0 12px 0 -2px #000,
+        0 -16px 0 -4px #000,
+        0 16px 0 -4px #000,
+        0 -22px 0 -8px #000,
+        0 22px 0 -8px #000,
+        0 -28px 0 -12px #000,
+        0 28px 0 -12px #000,
+        /* Outer Border */
+        -6px 0 0 0 #fff,
+        6px 0 0 0 #fff,
+        0 0 0 4px #fff,
+        0 -6px 0 2px #fff,
+        0 6px 0 2px #fff,
+        0 -10px 0 0 #fff,
+        0 10px 0 0 #fff,
+        0 -14px 0 -2px #fff,
+        0 14px 0 -2px #fff,
+        0 -18px 0 -4px #fff,
+        0 18px 0 -4px #fff,
+        0 -24px 0 -8px #fff,
+        0 24px 0 -8px #fff,
+        0 -30px 0 -12px #fff,
+        0 30px 0 -12px #fff;
 }
 
 .topEyelid {
@@ -432,7 +433,7 @@ canvas {
     z-index: 2;
     animation-name: sobeDesce;
     animation-duration: 4s;
-    animation-fill-mode:forwards;
+    animation-fill-mode: forwards;
     animation-delay: 2s;
 }
 
@@ -445,17 +446,31 @@ canvas {
     background-color: #000;
     z-index: 2;
     animation-name: sobeDesce;
-    animation-duration: 4s; 
-    animation-fill-mode:forwards;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
     animation-delay: 2s;
 }
 
 @keyframes sobeDesce {
-    0%   {height:300px;}
-    35%  {height:100px;} 
-    70%  {height:400px;}
-    95%  {height:  0px;}  
-    100% {height:  0px;}
+    0% {
+        height: 300px;
+    }
+
+    35% {
+        height: 100px;
+    }
+
+    70% {
+        height: 400px;
+    }
+
+    95% {
+        height: 0px;
+    }
+
+    100% {
+        height: 0px;
+    }
 }
 
 #frases {
@@ -495,6 +510,44 @@ canvas {
     text-align: center;
 }
 
+#slidingpuzzle {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+    text-align: center;
+}
+
+#ajuda {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
 #baixo {
     position: absolute;
     left: 4px;
@@ -524,68 +577,141 @@ canvas {
 }
 
 .pecas:hover {
-    cursor: url('imagens/cursor-click.png'), auto; 
+    cursor: url('imagens/cursor-click.png'), auto;
 }
 
 #peca1a {
-    left:62.5px;
+    left: 62.5px;
     bottom: 229px;
 }
 
 #peca1b {
-    left:197.5px;
+    left: 197.5px;
     bottom: 229px;
-    
+
 }
 
 #peca1c {
-    left:332.5px;
+    left: 332.5px;
     bottom: 229px;
 }
 
 #peca2a {
-    left:62.5px;
+    left: 62.5px;
     bottom: 149px;
 }
 
 #peca2b {
-    left:197.5px;
+    left: 197.5px;
     bottom: 149px;
 }
 
 #peca2c {
-    left:332.5px;
+    left: 332.5px;
     bottom: 149px;
 }
 
 #peca3a {
-    left:62.5px;
+    left: 62.5px;
     bottom: 70px;
 }
 
 #peca3b {
-    left:197.5px;
+    left: 197.5px;
     bottom: 70px;
 }
 
 #peca3c {
-    left:332.5px;
+    left: 332.5px;
     bottom: 70px;
 }
 
+.piece {
+    width: 28px;
+    height: 30px;
+    border: 0px;
+}
+
+.button {
+    width: 25px;
+    height: 25px;
+    border: 0px;
+    border-radius: 20px;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: #0F0;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.pink {
+    background-color: fuchsia;
+}
+
+#game-table {
+    position: absolute;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    border-spacing: 0px;
+    top: 14px;
+}
+
+.novojogo {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 10px;
+    background: #000;
+    border: inset 2px;
+    border-color: #fff;
+    color: #fff;
+    text-align: center;
+}
+
+.novojogo:hover {
+    cursor: url('imagens/cursor-click.png'), auto;
+}
+
+#button-table {
+    border-spacing: 4px;
+    vertical-align: top;
+}
+
+#turn-counter {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+}
 
 ::-webkit-scrollbar {
     width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent; 
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888; 
+    background: #888;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    background: #555;
 }

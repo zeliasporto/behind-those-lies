@@ -2,100 +2,99 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport"
-		content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
-	<title>Meu Joguinho</title>
-	<link rel="stylesheet" type="text/css" href="estilo.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=800, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui, shrink-to-fit=no" />
+    <title>Meu Joguinho</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css" />
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
-	<script type="text/javascript" src="jquery.js"></script>
-	
+    <script type="text/javascript" src="jquery.js"></script>
+
 </head>
 
 <body>
 
-	<div id="divJogo"></div>
+    <div id="divJogo"></div>
     <img id="imgMochila" src="imagens/mochila.png" style="display: none; position: absolute; left: 240px; top: 420px;" onclick="toggleDivInventario()" />
-	<div>	
-		<img src="imagens/celular.png" class=celular>
-	</div> 
+    <div>
+        <img src="imagens/celular.png" class=celular>
+    </div>
     <div id="preto" class="escondido"><img src="imagens/preto.jpg"></div>
     <div id="telabloqueada">
         <img src="imagens/wallpaper.png" id="wallpaper">
-        <p id="horas" >11:40</p>
-        <p id="remetente" >Alex</p>
+        <p id="horas">11:40</p>
+        <p id="remetente">Alex</p>
         <button id="conteudo" onclick="desbloquear()">Oi Fred</button>
     </div>
-	<div class="fundo-chat" id="chat">
-			<img src="imagens/msg1.png" class="msgalex" id="msg1">
-			<img src="imagens/1a.png" class="msgfred" id="1a">
-			<img src="imagens/1b.png" class="msgfred" id="1b">
-			<img src="imagens/msg2.png" class="msgalex" id="msg2">
-			<img src="imagens/2a.png" class="msgfred" id="2a">
-			<img src="imagens/2b.png" class="msgfred" id="2b">
-			<img src="imagens/msg3.png" class="msgalex" id="msg3">
-			<img src="imagens/3a.png" class="msgfred" id="3a">
-			<img src="imagens/3b.png" class="msgfred" id="3b">
-			<img src="imagens/msg4.png" class="msgalex" id="msg4">
-			<img src="imagens/4a.png" class="msgfred" id="4a">
-			<img src="imagens/4b.png" class="msgfred" id="4b">
-			<img src="imagens/msg5.png" class="msgalex" id="msg5">	
-            <img src="imagens/msg6.png" class="msgalex" id="msg6">
-            <img src="imagens/msg7.png" class="msgalex" id="msg7">	
-            <img src="imagens/7a.png" class="msgfred" id="7a">
-			<img src="imagens/7b.png" class="msgfred" id="7b">
-            <img src="imagens/msg8.png" class="msgalex" id="msg8">	
-            <img src="imagens/8a.png" class="msgfred" id="8a">
-			<img src="imagens/8b.png" class="msgfred" id="8b">
-            <img src="imagens/9a.png" class="msgfred" id="9a">
-			<img src="imagens/9b.png" class="msgfred" id="9b">
-            <img src="imagens/msg10.png" class="msgalex" id="msg10">	
-            <img src="imagens/msg11.png" class="msgalex" id="msg11">	
-            <img src="imagens/11a.png" class="msgfred" id="11a">
-			<img src="imagens/11b.png" class="msgfred" id="11b">
-		<div class="ultimamsg"></div>		
-	</div>
-		<div class="contato" id="contato">
-			<img src="imagens/alex.png" class="imagem">
-			<div id="texto"> Alex </div>
-		</div>
-		<div>
-            <img src="imagens/input.png" class="input" id="input">
-			<div id="grupo1">
-				<button class="left_button" onclick="clicar1a()" style="z-index: 1">ooi alex</button>
-				<button class="right_button" onclick="clicar1b()">olá</button>
-			</div>
-			<div id="grupo2" class="escondido">
-				<button class="left_button" onclick="clicar2a()">ontem foi louco!</button>
-				<button class="right_button" onclick="clicar2b()">não o vi...</button>
-			</div>
-			<div id="grupo3" class="escondido">
-				<button class="left_button" onclick="clicar3a()">falou com ela?</button>
-				<button class="right_button" onclick="clicar3b()">ela sempre gostou de vc ne</button>
-			</div>
-			<div id="grupo4" class="escondido">
-				<button class="left_button" onclick="clicar4a()">estou indo</button>
-				<button class="right_button" onclick="clicar4b()">ja chego ai, blz?</button>
-			</div>
-            <div id="grupo7" class="escondido">
-				<button class="left_button" onclick="clicar7a()">vacilo...</button>
-				<button class="right_button" onclick="clicar7b()">eu me viro</button>
-			</div>
-            <div id="grupo8" class="escondido">
-				<button class="left_button" onclick="clicar8a()">fui pra garagem</button>
-				<button class="right_button" onclick="clicar8b()">descobri</button>
-			</div>
-            <div id="grupo11" class="escondido">
-				<button class="left_button" onclick="clicar11a()">vou lá</button>
-				<button class="right_button" onclick="clicar11b()">obrigado</button>
-			</div>
-		</div>
+    <div class="fundo-chat" id="chat">
+        <img src="imagens/msg1.png" class="msgalex" id="msg1">
+        <img src="imagens/1a.png" class="msgfred" id="1a">
+        <img src="imagens/1b.png" class="msgfred" id="1b">
+        <img src="imagens/msg2.png" class="msgalex" id="msg2">
+        <img src="imagens/2a.png" class="msgfred" id="2a">
+        <img src="imagens/2b.png" class="msgfred" id="2b">
+        <img src="imagens/msg3.png" class="msgalex" id="msg3">
+        <img src="imagens/3a.png" class="msgfred" id="3a">
+        <img src="imagens/3b.png" class="msgfred" id="3b">
+        <img src="imagens/msg4.png" class="msgalex" id="msg4">
+        <img src="imagens/4a.png" class="msgfred" id="4a">
+        <img src="imagens/4b.png" class="msgfred" id="4b">
+        <img src="imagens/msg5.png" class="msgalex" id="msg5">
+        <img src="imagens/msg6.png" class="msgalex" id="msg6">
+        <img src="imagens/msg7.png" class="msgalex" id="msg7">
+        <img src="imagens/7a.png" class="msgfred" id="7a">
+        <img src="imagens/7b.png" class="msgfred" id="7b">
+        <img src="imagens/msg8.png" class="msgalex" id="msg8">
+        <img src="imagens/8a.png" class="msgfred" id="8a">
+        <img src="imagens/8b.png" class="msgfred" id="8b">
+        <img src="imagens/9a.png" class="msgfred" id="9a">
+        <img src="imagens/9b.png" class="msgfred" id="9b">
+        <img src="imagens/msg10.png" class="msgalex" id="msg10">
+        <img src="imagens/msg11.png" class="msgalex" id="msg11">
+        <img src="imagens/11a.png" class="msgfred" id="11a">
+        <img src="imagens/11b.png" class="msgfred" id="11b">
+        <div class="ultimamsg"></div>
+    </div>
+    <div class="contato" id="contato">
+        <img src="imagens/alex.png" class="imagem">
+        <div id="texto"> Alex </div>
+    </div>
+    <div>
+        <img src="imagens/input.png" class="input" id="input">
+        <div id="grupo1">
+            <button class="left_button" onclick="clicar1a()" style="z-index: 1">ooi alex</button>
+            <button class="right_button" onclick="clicar1b()">olá</button>
+        </div>
+        <div id="grupo2" class="escondido">
+            <button class="left_button" onclick="clicar2a()">ontem foi louco!</button>
+            <button class="right_button" onclick="clicar2b()">não o vi...</button>
+        </div>
+        <div id="grupo3" class="escondido">
+            <button class="left_button" onclick="clicar3a()">falou com ela?</button>
+            <button class="right_button" onclick="clicar3b()">ela sempre gostou de vc ne</button>
+        </div>
+        <div id="grupo4" class="escondido">
+            <button class="left_button" onclick="clicar4a()">estou indo</button>
+            <button class="right_button" onclick="clicar4b()">ja chego ai, blz?</button>
+        </div>
+        <div id="grupo7" class="escondido">
+            <button class="left_button" onclick="clicar7a()">vacilo...</button>
+            <button class="right_button" onclick="clicar7b()">eu me viro</button>
+        </div>
+        <div id="grupo8" class="escondido">
+            <button class="left_button" onclick="clicar8a()">fui pra garagem</button>
+            <button class="right_button" onclick="clicar8b()">descobri</button>
+        </div>
+        <div id="grupo11" class="escondido">
+            <button class="left_button" onclick="clicar11a()">vou lá</button>
+            <button class="right_button" onclick="clicar11b()">obrigado</button>
+        </div>
+    </div>
 
-        <div id="frases"></div>
-        <div id="divInventario" class="borda" style="display: none">
-          <p id="ablinkItens" class="abalink" style="
+    <div id="frases"></div>
+    <div id="divInventario" class="borda" style="display: none">
+        <p id="ablinkItens" class="abalink" style="
             float: left;
             width: 530px;
             height: 30px;                                          
@@ -108,15 +107,15 @@
             left: 0px;
             border-spacing: 10px;
             background: transparent;">Itens</p>
-        </div> 
-    
-        <div class="topEyelid"></div>
-        <div class="bottomEyelid"></div>
-    
+    </div>
+
+    <div class="topEyelid"></div>
+    <div class="bottomEyelid"></div>
+
     <div id="fundopc" class="borda" style="display: none">
         <img id="fb" src="imagens/fundopc.png">
         <button id="esqueceusenha" onclick="esqueceu()">esqueceu a senha?</button>
-        <div id="puzzleSenha" name="puzzleSenha" class="escondido"> 
+        <div id="puzzleSenha" name="puzzleSenha" class="escondido">
             <img id="esqueceu" src="imagens/esqueceu.png">
             <p id="pergunta">Responda à sua pergunta de segurança</p>
             <p id="filme">Qual o meu filme favorito?</p>
@@ -125,16 +124,16 @@
             <input type="image" src="imagens/enviar.png" value="Enviar" id="buttonSenha" />
         </div>
         <img id="post" src="imagens/post.png" class="escondido">
-    </div>  
-    
+    </div>
+
     <div id="puzzle" class="borda" style="display: none">
         <div id="baixo">
-            <img class="pecasantes"src="imagens/inicio.png" id="inicio" draggable="true" ondragstart="drag(event)">
-            <img class="pecasantes"src="imagens/curvabaixo.png" id="curvabaixo" draggable="true" ondragstart="drag(event)">
-            <img class="pecasantes"src="imagens/curvacima.png" id="curvacima" draggable="true" ondragstart="drag(event)">
-            <img class="pecasantes"src="imagens/reto.png" id="reto" draggable="true" ondragstart="drag(event)">
-            <img class="pecasantes"src="imagens/fim.png" id="fim" draggable="true" ondragstart="drag(event)">
-        </div> 
+            <img class="pecasantes" src="imagens/inicio.png" id="inicio" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes" src="imagens/curvabaixo.png" id="curvabaixo" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes" src="imagens/curvacima.png" id="curvacima" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes" src="imagens/reto.png" id="reto" draggable="true" ondragstart="drag(event)">
+            <img class="pecasantes" src="imagens/fim.png" id="fim" draggable="true" ondragstart="drag(event)">
+        </div>
         <div id="peca1a" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div id="peca1b" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div id="peca1c" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
@@ -145,13 +144,61 @@
         <div id="peca3b" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         <div id="peca3c" class="pecas" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
     </div>
-    
-    <script type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript" src="phaser.min.js"></script>
-	<script type="text/javascript" src="chat.js"></script>
-	<script type="text/javascript" src="jogo.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-    
-</body>
 
-</html>
+    <div id="slidingpuzzle" class="borda" style="display: none">
+        <table>
+            <tr>
+                <td valign="top">
+                    <table>
+                        <tr>
+                            <td valign="top">
+                                <table id="button-table">
+                                    <tr>
+                                        <td class="button blue" onclick="flood ('blue')">
+                                        </td>
+                                        <td class="button red" onclick="flood ('red')">
+                                        </td>
+                                        <td class="button green" onclick="flood ('green')">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="button yellow" onclick="flood ('yellow')">
+                                        </td>
+                                        <td class="button pink" onclick="flood ('pink')">
+                                        </td>
+                                        <td class="button purple" onclick="flood ('purple')">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td id="turn-counter" valign="top">
+                                Turn: <span id="moves"></span>/<span id="max-moves"></span>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td valign="top">
+                                <input class="novojogo" type="submit" value="New game" onclick="new_game ()">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table id="game-table">
+                        <tbody id="game-table-tbody">
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="phaser.min.js"></script>
+    <script type="text/javascript" src="chat.js"></script>
+    <script type="text/javascript" src="jogo.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+
+</body></html>
