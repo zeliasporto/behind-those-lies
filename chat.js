@@ -80,13 +80,14 @@ var clicando = false;
         "Acho bom pegar minha mochila, pode ser útil",
         " "
         ], 50, 800);
-    }, 4000);  
+    }, 4000); 
     setTimeout(function () {scroll()}, 5100);  
     setTimeout(function () {document.getElementById("msg6").style.display = "block";}, 5150);
     setTimeout(function () {scroll()}, 5000);
     setTimeout(function () {document.getElementById("msg7").style.display = "block";}, 5200);
     setTimeout(function () {scroll()}, 5250);
     setTimeout(function () {mostrarGrupo("grupo7")}, 5300)
+    chat_terminado = true
   }  
   
 
@@ -108,6 +109,7 @@ var clicando = false;
     setTimeout(function () {document.getElementById("msg7").style.display = "block";}, 5250);
     setTimeout(function () {scroll()}, 5300);
     setTimeout(function () {mostrarGrupo("grupo7")}, 5350)  
+    chat_terminado = true 
   }
 
 function clicar7a() {

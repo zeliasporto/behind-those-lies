@@ -1,11 +1,11 @@
 "use strict";
 // Essa não é a forma mais "profissional" de fazer, mas é a mais simples :)
-
 // Vamos chamar a variável de game, para ficar igual ao sandbox!
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "divJogo");
 var botao, botaoAbrirPc, botaoCriarInventario, botao3, botao4, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
     divInventario = document.getElementById("divInventario"),
     inventario = {};
+var click = false;
 var img, imagem, portao, carro, dialogo;
 var frases = document.getElementById("frases");
 var mudandoTexto = false,
@@ -28,6 +28,7 @@ var peca3c = document.getElementById("peca3c");
 var n_rows = 11;
 var n_cols = 14;
 var start_table = new Array(n_rows);
+var chat_terminado = false;
 for (var row = 0; row < n_rows; row++) {
     start_table[row] = new Array(n_cols);
 }
@@ -334,7 +335,13 @@ function mudarTexto(texto, intervalo, pausaEntreFrases, personagem, callback) {
         frases.style.color = "#84a793";
     }
     if (personagem === 3) {
-        frases.style.color = "#e00201";
+        frases.style.color = "#F4FA58";
+    }
+    if (personagem === 4) {
+        frases.style.color = "#E2A9F3";
+    }
+    if (personagem === 5) {
+        frases.style.color = "#DF0101";
     }
     if (!pausaEntreFrases || pausaEntreFrases <= 10) {
         pausaEntreFrases = 100;
@@ -597,7 +604,7 @@ function TelaInicial(game) {
         porta.inputEnabled = true;
         porta.input.useHandCursor = true;
         porta.events.onInputDown.add(function () {
-            if (itemEstaNoInventario("chave")) {
+            if (itemEstaNoInventario("chave") && chat_terminado) {
                 porta.kill();
                 removerDoInventario("chave");
                 var portaaberta = game.add.image(0, 180, "portaaberta");
@@ -611,11 +618,16 @@ function TelaInicial(game) {
                     game.state.start("Tela2");
                 });
             } else {
-                mudarTexto(["Nossa, eu tranquei a porta? Nunca faço isso... devia estar \n\ muito louco. Mas cadê a chave?",
+                if(chat_terminado){
+                    mudarTexto(["Nossa, eu tranquei a porta? Nunca faço isso... devia estar \n\ muito louco. Mas cadê a chave?",
                             " "], 50, 800)
+                }
+                else if(itemEstaNoInventario("chave")){
+                    mudarTexto(["Preciso responder a mensagem",
+                            " "], 50, 800)
+                }
             }
         });
-
     }
 
     this.update = function () {
@@ -1331,6 +1343,7 @@ function Tela7(game) {
     this.preload = function () {
         game.load.crossOrigin = "anonymous";
 
+        game.load.image("botao", "imagens/botao.png");
         game.load.image();
         game.load.image();
         game.load.image();
@@ -1341,78 +1354,294 @@ function Tela7(game) {
     }
 
     this.create = function () {
+        botao = game.add.image(735, 5, "botao");
+        botao.alpha = 1.0;
+        botao.inputEnabled = true;
+        botao.input.useHandCursor = true;
+        botao.events.onInputDown.add(function () {
+            abortarMudancaTexto();
+            game.state.start("Tela8");
+        })
+    }
+}
 
+function Tela8(game) {
+    this.init = function () {
+
+        game.input.maxPointers = 1;
+        // Deixar o jogo executando, mesmo se o browser mudar de aba?
+        game.stage.disableVisibilityChange = true;
+
+        if (game.device.desktop) {
+            // Configurações específicas para desktop
+
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        } else {
+            // Configurações específicas para celulares
+            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
+            game.scale.setMinMax(400, 300, 800, 600);
+            game.scale.forceLandscape = true;
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        }
     }
 
-    function Tela8(game) {
-        this.init = function () {
+    this.preload = function () {
+        game.load.crossOrigin = "anonymous";
 
-            game.input.maxPointers = 1;
-            // Deixar o jogo executando, mesmo se o browser mudar de aba?
-            game.stage.disableVisibilityChange = true;
+        game.load.image("fechar", "imagens/fechar.png");
+        game.load.image("mochila", "imagens/mochila.png");
+        game.load.image("botao", "imagens/botao.png");
+        game.load.image("dialogo", "imagens/dialogo.png");
+        game.load.image("floresta1", "imagens/floresta1.png");
+        game.load.image("floresta2", "imagens/floresta2.png");
+        game.load.image("sangue", "imagens/sangue.png");
+        game.load.image("placa", "imagens/placa.png");
+        game.load.image("alex", "imagens/alexchorando.png");
+        game.load.image("billy", "imagens/billy.png");
+        game.load.audio("passos", "audios/audiopassos.mp3");
+    }
 
-            if (game.device.desktop) {
-                // Configurações específicas para desktop
+    this.create = function () {
+        fundo = game.add.image(0, 0, "floresta1");
+        var dialogo = game.add.image(0, 500, "dialogo");
+        dialogo.alpha = 0.7;
+        var imgMochila = document.getElementById("imgMochila");
+        imgMochila.style.display = "";
+        
+        var placa = game.add.image(709, 317, "placa");
+            placa.alpha = 1.0;
+            placa.inputEnabled = true;
+            placa.input.useHandCursor = true;
+            placa.events.onInputDown.add(floresta2, this);
 
-                // Como criamos o CSS acima, não precisamos centralizar via código
-                game.scale.pageAlignHorizontally = false;
-            } else {
-                // Configurações específicas para celulares
-                game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-                // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
-                game.scale.setMinMax(400, 300, 800, 600);
-                game.scale.forceLandscape = true;
-                // Como criamos o CSS acima, não precisamos centralizar via código
-                game.scale.pageAlignHorizontally = false;
-            }
+        var alex = game.add.image(150, 150, "alex");
+        alex.alpha = 1.0;
+        alex.inputEnabled = true;
+        alex.input.useHandCursor = true;
+        alex.events.onInputDown.add(function () {
+            mudarTexto(["Até que enfim, você conseguiu chegar.",
+                        " "], 50, 800, 4, f1)
+        })
+
+        function f1() {
+            mudarTexto([" Alex? O que…?", " "], 50, 800, 0, alex1);
         }
 
-        this.preload = function () {
-            game.load.crossOrigin = "anonymous";
-
-            game.load.image("fechar", "imagens/fechar.png");
-            game.load.image("mochila", "imagens/mochila.png");
-            game.load.image("botao", "imagens/botao.png");
-            game.load.image("dialogo", "imagens/dialogo.png");
-            game.load.image("floresta1", "imagens/floresta1.png");
-            game.load.image("floresta2", "imagens/floresta2.png");
-            game.load.image("floresta3", "imagens/floresta3.png");
+        function alex1() {
+            mudarTexto(["Eu não sabia como contar, nem com quem falar… eu preciso de \n\ ajuda!", " "], 50, 800, 4, f2);
         }
 
-        this.create = function () {
-            fundo = game.add.image(0, 0, "floresta1");
+        function f2() {
+            mudarTexto(["Ah… ajuda com o que?", " "], 50, 800, 0, alex2)
+        }
+
+        function alex2() {
+            mudarTexto(["Acho que é melhor contar desde o começo… Billy nunca foi… \n\ uma pessoa legal.",
+                                " "], 50, 800, 4, f3)
+        }
+
+        function f3() {
+            mudarTexto(["Como assim? A gente se conhece desde sempre.", " "], 50, 800, 0, alex3)
+        }
+
+        function alex3() {
+            mudarTexto(["Você não esteve presente em todos os momentos… Nos piores, no \n\ caso. Quando tínhamos 12 anos, Billy me chamava \n\ pra ir na casa dele pra jogar “verdade ou desafio”.",
+                                "No começo eram coisas bobas, como um selinho… mas Billy foi \n\ ficando invasivo",
+                                " "], 50, 800, 4, f4)
+        }
+
+        function f4() {
+            mudarTexto(["Invasivo...?", " "], 50, 800, 0, alex4)
+        }
+
+        function alex4() {
+            mudarTexto(["Ele colocava a mão por baixo da minha blusa, me segurava na \n\ parede… Eu não tinha noção dessas coisas, pra mim era \n\ um pouco estranho mas nada demais…", " "], 50, 800, 4, f5)
+        }
+
+        function f5() {
+            mudarTexto(["Você podia ter falado comigo, não devia ficar sozinha com ele.", " "], 50, 800, 0, alex5)
+        }
+
+        function alex5() {
+            mudarTexto(["Ele disse que era um segredo nosso e que a gente só tava se \n\ divertindo.",
+                                "Passei uns anos afastada dele, até mudei de turma.", "Mas aí na festa de 17 da Rachel, ele chegou em mim de novo. \n\ Tentou me beijar mas eu me afastei. Nisso ele agarrou meu \n\ braço e me arrastou pro banheiro.",
+                                "E-eu não queria, mas Billy sempre foi muito mais forte que eu. \n\ Ele puxou minha calça… e acho que o resto você consegue entender.",
+                                " "], 50, 800, 4, f6)
+        }
+
+        function f6() {
+            mudarTexto(["Meu Deus…", " "], 50, 800, 0, alex6)
+        }
+
+        function alex6() {
+            mudarTexto(["Durante esse último ano ele me perseguia, e não fez o \n\ que fez uma vez só. Eu mudei meus horários, mas não podia \n\ sair do colégio, é o melhor da cidade.",
+                                "Me afastei de você também, porque estava sempre com ele.",
+                                " "], 50, 800, 4, f7)
+        }
+
+        function f7() {
+            mudarTexto(["Eu não sabia que ele era assim…", " "], 50, 800, 0, alex7)
+        }
+
+        function alex7() {
+            mudarTexto(["Na festa de ontem eu fui comprar chicletes na loja de conve- \n\ niência do posto atrás da casa da Rachel.",
+                                "Billy apareceu, bêbado e puto, reclamando que alguém na festa \n\ tinha estragado o carro dele. Eu não sabia pra onde fugir. \n\ Ele me viu e recebi aquele mesmo olhar. Eu fiquei com medo.",
+                               " "], 50, 800, 4, f8)
+        }
+
+        function f8() {
+            mudarTexto(["E como veio parar aqui?", " "], 50, 800, 0, alex8)
+        }
+
+        function alex8() {
+            mudarTexto(["Ele me arrastou até aqui, tentou de novo. Me prendeu entre ele \n\ e uma árvore. Eu estava com medo, mas não ia deixar \n\ ele tocar em mim de novo.", " "], 50, 800, 4, f9)
+        }
+
+        function f9() {
+            mudarTexto(["E o que você fez?", " "], 50, 800, 0, alex9)
+        }
+
+        function alex9() {
+            mudarTexto(["Peguei um galho que estava perto da minha mão.", "Acertei o olho dele duas ou três vezes. Ele caiu no chão, não \n\ tava se mexendo, e me escondi aqui na floresta, mas… ele ainda \n\ está ali.",
+                                "Não sei o que fazer com o corpo, com o sangue…",
+                                " "], 50, 800, 4, f10)
+        }
+
+        function f10() {
+            mudarTexto(["Ei, calma, você fez o que foi preciso.", " "], 50, 800, 0, alex10)
+        }
+
+        function alex10() {
+            mudarTexto(["Eu MATEI alguém, meu Deus!! Eu matei alguém...", " "], 50, 800, 4, f11)
+        }
+
+        function f11() {
+            mudarTexto(["Foi legítima defesa, Alex. Onde ele está? \n\ Vamos enterrar ou… não sei.", " "], 50, 800, 0, alex11)
+        }
+
+        function alex11() {
+            mudarTexto(["Ta bem...", " "], 50, 800, 4, placa)
+        }
+
+        function placa() {
+            var placa = game.add.image(709, 317, "placa");
+            placa.alpha = 1.0;
+            placa.inputEnabled = true;
+            placa.input.useHandCursor = true;
+            placa.events.onInputDown.add(floresta2, this);
+        }
+
+        function floresta2() {
+            fundo = game.add.image(0, 0, "floresta2");
             var dialogo = game.add.image(0, 500, "dialogo");
             dialogo.alpha = 0.7;
-            var imgMochila = document.getElementById("imgMochila");
-            imgMochila.style.display = "";
-        }
+            alex = game.add.image(150, 150, "alex");
 
+            var sangue = game.add.image(450, 376, "sangue");
+            sangue.width = 100;
+            sangue.height = 100;
+            sangue.alpha = 1.0;
+            sangue.inputEnabled = true;
+            sangue.input.useHandCursor = true;
+            sangue.events.onInputDown.add(function () {
+                mudarTexto(["Alex, cadê o corpo?", " "], 50, 800, 0, alex12)
+            })
 
-        // Os estados do jogo podem ser entendidos como "telas" ou "cenários"
-        // Se nosso jogo tivesse mais de uma "tela", bastaria adicionar as telas aqui,
-        // dando nomes para cada uma (para alternar entre uma tela e outra, bastaria
-        // executar jogo.state.start("Nome da tela") a qualquer momento)
-        game.state.add("TelaInicial", TelaInicial);
-        game.state.add("Tela2", Tela2);
-        game.state.add("Tela3", Tela3);
-        game.state.add("Tela4", Tela4);
-        game.state.add("Tela5", Tela5);
-        game.state.add("Tela6", Tela6);
-        game.state.add("Tela7", Tela7);
-        game.state.add("Tela8", Tela8);
+            function alex12() {
+                mudarTexto(["Ele… estava aqui, eu juro!", " "], 50, 800, 4, f13)
+            }
 
-        window.WebFontConfig = {
-            //  'active' means all requested fonts have finished loading
-            //  We set a 1 second delay before calling 'createText'.
-            //  For some reason if we don't the browser cannot render the text the first time it's created.
-            active: function () {
+            function f13() {
+                mudarTexto(["Ele não consegue nem arcar com as consequências, \n\ cadê esse filho da-", " "], 50, 800, 0, passos)
+            }
+
+            function passos() {
+                var audiopassos = game.add.audio("passos", 1.0, false);
+                audiopassos.play()
                 setTimeout(function () {
-                    game.state.start("Tela6"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
-                }, 500);
-            },
+                    mudarTexto(["Que barulho foi esse? Freddie...", " "], 50, 800, 4, billyaparece)
+                }, 1000)
+            }
 
-            //  The Google Fonts we want to load (specify as many as you like in the array)
-            google: {
-                families: ['Press+Start+2P']
+            function billyaparece() {
+                var billy = game.add.image(200, 120, "billy")
+                setTimeout(function () {
+                    mudarTexto(["E eu... faria.. tudo... de novo", " "], 50, 800, 5, function () {
+                        setTimeout(function () {
+                            game.state.start("Tela9")
+                        }, 1500)
+                    })
+                })
             }
         }
+    }
+}
+
+function Tela9(game) {
+    this.init = function () {
+
+        game.input.maxPointers = 1;
+        // Deixar o jogo executando, mesmo se o browser mudar de aba?
+        game.stage.disableVisibilityChange = true;
+
+        if (game.device.desktop) {
+            // Configurações específicas para desktop
+
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        } else {
+            // Configurações específicas para celulares
+            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
+            game.scale.setMinMax(400, 300, 800, 600);
+            game.scale.forceLandscape = true;
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        }
+    }
+
+    this.preload = function () {
+        game.load.crossOrigin = "anonymous";
+
+        game.load.image("creditos", "imagens/creditos.png");
+    }
+
+    this.create = function () {
+        fundo = game.add.image(0, 0, "creditos");
+    }
+}
+
+
+
+// Os estados do jogo podem ser entendidos como "telas" ou "cenários"
+// Se nosso jogo tivesse mais de uma "tela", bastaria adicionar as telas aqui,
+// dando nomes para cada uma (para alternar entre uma tela e outra, bastaria
+// executar jogo.state.start("Nome da tela") a qualquer momento)
+game.state.add("TelaInicial", TelaInicial);
+game.state.add("Tela2", Tela2);
+game.state.add("Tela3", Tela3);
+game.state.add("Tela4", Tela4);
+game.state.add("Tela5", Tela5);
+game.state.add("Tela6", Tela6);
+game.state.add("Tela7", Tela7);
+game.state.add("Tela8", Tela8);
+game.state.add("Tela9", Tela9);
+
+window.WebFontConfig = {
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function () {
+        setTimeout(function () {
+            game.state.start("Tela8"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
+        }, 500);
+    },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+        families: ['Press+Start+2P']
+    }
+}
