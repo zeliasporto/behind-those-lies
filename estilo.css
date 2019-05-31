@@ -684,6 +684,56 @@ canvas {
     border-color: #fff;
     color: #fff;
     text-align: center;
+    width: 100px;
+    height: 35px;
+}
+
+#instrucoes {
+    position: absolute;
+    top: 150px;
+    left: 0px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 9px;
+    padding: 10px;
+    background: #000;
+    border: inset 2px;
+    border-color: #fff;
+    color: #fff;
+    text-align: center;
+    width: 100px;
+    height: 35px;
+}
+
+#instrucoes:hover{
+    cursor: url('imagens/cursor-click.png'), auto;
+}
+
+#instru {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    color: #fff;
+    vertical-align: middle;
+    text-align: justify;
+    line-height: 1.6;
+    top: 150px;
+}
+
+#instrucao {
+    color: #fff;
+    background: #000;
+    width: 530px;
+    height: 350px;
+    border-left: inset 30px;
+    border-right: inset 30px;
+    border-bottom: inset 30px;
+    border-color: transparent;
+    bottom: 150px;
+    left: 390px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px auto;
+    position: absolute;
+    text-align: center;
 }
 
 .novojogo:hover {

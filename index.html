@@ -109,8 +109,8 @@
             background: transparent;">Itens</p>
     </div>
 
-    <div class="topEyelid"></div>
-    <div class="bottomEyelid"></div>
+    <div id="topEyelid"></div>
+    <div id="bottomEyelid"></div>
 
     <div id="fundopc" class="borda" style="display: none">
         <img id="fb" src="imagens/fundopc.png">
@@ -146,6 +146,7 @@
     </div>
 
     <div id="slidingpuzzle" class="borda" style="display: none">
+        <button id="instrucoes" onclick="toggleinstrucoes()">Intruções</button>
         <table>
             <tr>
                 <td valign="top">
@@ -192,6 +193,26 @@
                 </td>
             </tr>
         </table>
+    </div>
+    
+    <div id="instrucao" class="borda" style="display: none">
+        <p id="ablinkItens" class="abalink" style="
+            float: left;
+            text-align: left;
+            width: 530px;
+            height: 30px;                                          
+            text-decoration: underline;
+            border-color: transparent;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 25px;
+            color: #fff;
+            background-position: top;
+            left: 0px;
+            border-spacing: 10px;
+            background: transparent;">Instruções</p>
+        <p id="instru">
+            Selecione os botões de círculo para preencher a imagem com a cor do canto superior esquerdo. Preencha a imagem inteira com a mesma cor, você tem 26 tentativas.
+        </p>
     </div>
     
     <!--<div id="titles"><div id="titlecontent">

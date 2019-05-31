@@ -29,6 +29,7 @@ var n_rows = 11;
 var n_cols = 14;
 var start_table = new Array(n_rows);
 var chat_terminado = false;
+var pingos;
 for (var row = 0; row < n_rows; row++) {
     start_table[row] = new Array(n_cols);
 }
@@ -62,6 +63,20 @@ function proximo5() {
         abortarMudancaTexto();
         game.state.start("Tela5");
     })
+}
+
+function toggleinstrucoes() {
+    if (instrucao.style.display == "none") {
+        instrucao.style.display = "block";
+        fechar = game.add.image(740, 5, "fechar");
+        fechar.inputEnabled = true;
+        fechar.input.priorityID = 1;
+        fechar.input.useHandCursor = true;
+        fechar.events.onInputDown.add(toggleinstrucoes, this);
+    } else {
+        instrucao.style.display = "none";
+        fechar.kill();
+    }
 }
 
 function toggleSliding() {
@@ -165,6 +180,41 @@ function flood(colour, initial) {
             toggleSliding();
             setTimeout(function () {
                 fundo = game.add.image(0, 0, "garagem")
+                var caixa1 = game.add.image(595, 167, "caixa1");
+                caixa1.alpha = 1.0;
+                caixa1.inputEnabled = true;
+                caixa1.input.useHandCursor = true;
+                caixa1.events.onInputDown.add(function () {
+                    mudarTexto(["Eu não deveria mexer aqui",
+                                " "], 50, 800)
+                });
+
+                var livros = game.add.image(585, 73, "livros");
+                livros.alpha = 1.0;
+                livros.inputEnabled = true;
+                livros.input.useHandCursor = true;
+                livros.events.onInputDown.add(function () {
+                    mudarTexto(["Não sabia que a Rachel também gostava de HQs",
+                                " "], 50, 800)
+                });
+
+                var prateleiras = game.add.image(292, 44, "prateleiras");
+                prateleiras.alpha = 1.0;
+                prateleiras.inputEnabled = true;
+                prateleiras.input.useHandCursor = true;
+                prateleiras.events.onInputDown.add(function () {
+                    mudarTexto(["Eu não deveria mexer aqui",
+                                " "], 50, 800)
+                });
+
+                var caixa2 = game.add.image(73, 163, "caixa2");
+                caixa2.alpha = 1.0;
+                caixa2.inputEnabled = true;
+                caixa2.input.useHandCursor = true;
+                caixa2.events.onInputDown.add(function () {
+                    mudarTexto(["Eu não deveria mexer aqui",
+                                " "], 50, 800)
+                });
             }, 1000);
             setTimeout(function () {
                 dialogo = game.add.image(0, 500, "dialogo");
@@ -221,6 +271,15 @@ function new_game() {
     clear(get_by_id("game-table-tbody"));
     create_table();
 }
+
+function abrirPc() {
+        fundopc.style.display = "block";
+        fechar = game.add.image(740, 5, "fechar");
+        fechar.inputEnabled = true;
+        fechar.input.priorityID = 1;
+        fechar.input.useHandCursor = true;
+        fechar.events.onInputDown.add(fecharPc, this);
+    }
 
 function fecharPc() {
     fundopc.style.display = "none";
@@ -301,8 +360,14 @@ function removerDoInventario(nomeItem) {
 function toggleDivInventario() {
     if (divInventario.style.display == "none") {
         divInventario.style.display = "block";
+        fechar = game.add.image(740, 5, "fechar");
+        fechar.inputEnabled = true;
+        fechar.input.priorityID = 1;
+        fechar.input.useHandCursor = true;
+        fechar.events.onInputDown.add(toggleDivInventario, this);
     } else {
         divInventario.style.display = "none";
+        fechar.kill();
     }
 }
 
@@ -408,6 +473,7 @@ function drop(ev) {
             fundo = game.add.image(0, 0, "postoconcertado");
             dialogo = game.add.image(0, 500, "dialogo");
             dialogo.alpha = 0.7;
+            pingos.destroy();
             togglePuzzle();
             mudarTexto([
                 "Ótimo trabalho. O que queria saber mesmo?",
@@ -484,9 +550,13 @@ function TelaInicial(game) {
     }
 
     this.preload = function () {
+        document.getElementById("topEyelid").className = "topEyelid";
+        document.getElementById("bottomEyelid").className = "bottomEyelid";
+        
         game.load.crossOrigin = "anonymous";
 
         game.load.image("mochila", "imagens/mochila.png");
+        game.load.image("fechar", "imagens/fechar.png");
         game.load.image("chave", "imagens/chave.png");
         game.load.image("quartofred", "imagens/quartofred.png");
         game.load.image("botao", "imagens/botao.png");
@@ -498,22 +568,12 @@ function TelaInicial(game) {
         game.load.image("armario", "imagens/armario.png");
         game.load.image("caixa", "imagens/caixa.png");
         game.load.image("vaso", "imagens/vaso.png");
+        game.load.audio("portaabrindo", "audios/opendoor.mp3");
     }
 
     var tween = null;
     var popup;
     var inventarioCriado;
-
-    setTimeout(function () {
-        mudarTexto([
-            "Ughh... eu não devia ter bebido tanto ontem...",
-            "11:40... acho que ainda dá pra dormir mais um pouc-",
-            "Espera, alex mandou mensagem?? a gente não se fala há tanto \n\ tempo. vou ter que responder!",
-            " "
-        ], 50, 800, 0);
-    }, 6100);
-
-    document.getElementById("msg1").style.display = "block";
 
     function criarInventario() {
         inventarioCriado = true;
@@ -523,6 +583,18 @@ function TelaInicial(game) {
     }
 
     this.create = function () {
+        tween = null;
+        setTimeout(function () {
+            mudarTexto([
+                "Ughh... eu não devia ter bebido tanto ontem...",
+                "11:40... acho que ainda dá pra dormir mais um pouc-",
+                "Espera, alex mandou mensagem?? a gente não se fala há tanto \n\ tempo. vou ter que responder!",
+                " "
+            ], 50, 800, 0);
+        }, 6100);
+
+        document.getElementById("msg1").style.display = "block";
+
         telaAtual = 0;
         botaoPodeClicar = true;
         mudandoTexto = false;
@@ -606,8 +678,11 @@ function TelaInicial(game) {
         porta.events.onInputDown.add(function () {
             if (itemEstaNoInventario("chave") && chat_terminado) {
                 porta.kill();
+                var portaabrindo = game.add.audio("portaabrindo", 1.0, false);
+                portaabrindo.play();
                 removerDoInventario("chave");
                 var portaaberta = game.add.image(0, 180, "portaaberta");
+                var portaabrindo = game.add.audio("portaabrindo")
                 portaaberta.height = 320;
                 var botao = game.add.image(735, 5, "botao");
                 botao.alpha = 1.0;
@@ -675,6 +750,7 @@ function Tela2(game) {
         game.load.image("avengers", "imagens/avengers.png");
         game.load.image("flash", "imagens/flash.png");
         game.load.image("estante", "imagens/estante.png");
+        game.load.audio("knock", "audios/knockdoor.mp3");
     }
 
     function notificacao() {
@@ -682,15 +758,6 @@ function Tela2(game) {
         document.getElementById("telabloqueada").className = "";
         document.getElementById("horas").innerHTML = "12:02";
         document.getElementById("conteudo").innerHTML = "desculpa pelo desencontro...";
-    }
-
-    function abrirPc() {
-        fundopc.style.display = "block";
-        fechar = game.add.image(740, 5, "fechar");
-        fechar.inputEnabled = true;
-        fechar.input.priorityID = 1;
-        fechar.input.useHandCursor = true;
-        fechar.events.onInputDown.add(fecharPc, this);
     }
 
     this.create = function () {
@@ -704,6 +771,10 @@ function Tela2(game) {
 
         fundo = game.add.image(0, 0, "quartobilly");
 
+        
+        var knock = game.add.audio("knock", 1.0, false);
+        knock.play();
+
         setTimeout(function () {
             mudarTexto([
             "Olá? é o Freddie!",
@@ -711,41 +782,7 @@ function Tela2(game) {
             "Ue, será que não tem ninguém em casa?",
             " "
             ], 50, 800, 0, notificacao);
-        }, 1000);
-
-        var avengers = game.add.image(467, 167, "avengers");
-        avengers.alpha = 1.0;
-        avengers.inputEnabled = true;
-        avengers.input.useHandCursor = true;
-        avengers.events.onInputDown.add(function () {
-            mudarTexto(["Billy anda mesmo viciado em Avengers, não fala de outra coisa...",
-                        " "], 50, 800)
-        });
-
-        var flash = game.add.image(366, 199, "vaso");
-        flash.alpha = 1.0;
-        flash.inputEnabled = true;
-        flash.input.useHandCursor = true;
-        flash.events.onInputDown.add(function () {
-            mudarTexto(["Lembro que Flash era o herói favorito dele quando éramos \n\ crianças...",
-                        " "], 50, 800)
-        });
-        var estante = game.add.image(0, 155, "estante");
-        estante.alpha = 1.0;
-        estante.inputEnabled = true;
-        estante.input.useHandCursor = true;
-        estante.events.onInputDown.add(function () {
-            mudarTexto(["Nossa, até quadrinhos de Avengers ele tem. E Billy nem gosta \n\ muito de ler",
-                        " "], 50, 800)
-        });
-
-        botaoAbrirPc = game.add.image(509, 359, "pc");
-        botaoAbrirPc.anchor.set(0.5);
-        botaoAbrirPc.alpha = 1.0;
-        botaoAbrirPc.inputEnabled = true;
-        botaoAbrirPc.input.useHandCursor = true;
-        botaoAbrirPc.events.onInputDown.add(abrirPc, this);
-
+        }, 2000);        
 
         var dialogo = game.add.image(0, 500, "dialogo");
         dialogo.alpha = 0.7;
@@ -789,6 +826,7 @@ function Tela3(game) {
         game.load.image("botao", "imagens/botao.png");
         game.load.image("dialogo", "imagens/dialogo.png");
         game.load.image("restaurante", "imagens/restaurante.png");
+        game.load.audio("campainha", "audios/campainha.mp3");
     }
 
     this.create = function () {
@@ -928,12 +966,17 @@ function Tela3(game) {
         " "
         ], 50, 800, 1, chefe);
         }
-
+        
         function chefe() {
+            var campainha = game.add.audio("campainha", 1.0, false);
+            campainha.play();
+
+        setTimeout(function () {
             mudarTexto([
         "RACHEL!! esses copos não vão se lavar sozinhos",
         " "
         ], 50, 800, 3, rachel10);
+        }, 1500)
         }
 
         function rachel10() {
@@ -1004,6 +1047,8 @@ function Tela4(game) {
         fundo = game.add.image(0, 0, "portao");
         var dialogo = game.add.image(0, 500, "dialogo");
         dialogo.alpha = 0.7;
+        var imgMochila = document.getElementById("imgMochila");
+        imgMochila.style.display = "";
 
         var sliding = game.add.image(707, 190, "sliding");
         sliding.alpha = 1.0;
@@ -1011,47 +1056,12 @@ function Tela4(game) {
         sliding.input.useHandCursor = true;
         sliding.events.onInputDown.add(toggleSliding, this);
 
-        var caixa1 = game.add.image(595, 167, "caixa1");
-        caixa1.alpha = 1.0;
-        caixa1.inputEnabled = true;
-        caixa1.input.useHandCursor = true;
-        caixa1.events.onInputDown.add(function () {
-            mudarTexto(["Eu não deveria mexer aqui",
-                        " "], 50, 800)
-        });
-
-        var livros = game.add.image(585, 73, "livros");
-        livros.alpha = 1.0;
-        livros.inputEnabled = true;
-        livros.input.useHandCursor = true;
-        livros.events.onInputDown.add(function () {
-            mudarTexto(["Não sabia que a Rachel também gostava de HQs",
-                        " "], 50, 800)
-        });
-
-        var prateleiras = game.add.image(292, 44, "prateleiras");
-        prateleiras.alpha = 1.0;
-        prateleiras.inputEnabled = true;
-        prateleiras.input.useHandCursor = true;
-        prateleiras.events.onInputDown.add(function () {
-            mudarTexto(["Eu não deveria mexer aqui",
-                        " "], 50, 800)
-        });
-
-        var caixa2 = game.add.image(73, 163, "caixa2");
-        caixa2.alpha = 1.0;
-        caixa2.inputEnabled = true;
-        caixa2.input.useHandCursor = true;
-        caixa2.events.onInputDown.add(function () {
-            mudarTexto(["Eu não deveria mexer aqui",
-                        " "], 50, 800)
-        });
     }
 }
 
 function Tela5(game) {
     var fred, cursors, cone1, cone2, cone3, cone4, cone5, cone6, bombaGas;
-    var carro1, carro2, carro3, carro4, bicicleta, caminhao;
+    var carros, carro1, carro2, carro3, carro4, bicicleta, caminhao;
 
 
     this.init = function () {
@@ -1092,11 +1102,15 @@ function Tela5(game) {
         game.load.image("bicicleta", "imagens/bicicleta.png");
         game.load.image("cone", "imagens/cone.png");
         game.load.image("caminhao", "imagens/caminhao.png");
+        game.load.audio("carros", "audios/carpuzzle.mp3");
     }
 
     this.create = function () {
 
         fundo = game.add.image(0, 0, "ruaPuzzle");
+        
+        carros = game.add.audio("carros", 1.0, true);
+        carros.play();
 
         var imgMochila = document.getElementById("imgMochila");
         imgMochila.style.display = "none";
@@ -1203,6 +1217,7 @@ function Tela5(game) {
 
     function colisao() {
         fred.kill();
+        carros.destroy();
         game.state.start(game.state.current);
     }
 
@@ -1212,6 +1227,7 @@ function Tela5(game) {
         botao.inputEnabled = true;
         botao.input.useHandCursor = true;
         botao.events.onInputDown.add(function () {
+            carros.destroy();
             abortarMudancaTexto();
             game.state.start("Tela6");
         })
@@ -1251,6 +1267,7 @@ function Tela6(game) {
         game.load.image("posto", "imagens/posto.png");
         game.load.image("canosimg", "imagens/puzzle.png");
         game.load.image("postoconcertado", "imagens/postoconcertado.png");
+        game.load.audio("pingos", "audios/dropdrop.mp3");
     }
 
     this.create = function () {
@@ -1259,6 +1276,8 @@ function Tela6(game) {
         dialogo.alpha = 0.7;
         var imgMochila = document.getElementById("imgMochila");
         imgMochila.style.display = "";
+        pingos = game.add.audio("pingos", 1.0, true);
+        pingos.play();
 
         mudarTexto([
         "Olá?",
@@ -1344,13 +1363,7 @@ function Tela7(game) {
         game.load.crossOrigin = "anonymous";
 
         game.load.image("botao", "imagens/botao.png");
-        game.load.image();
-        game.load.image();
-        game.load.image();
-        game.load.image();
-        game.load.image();
-        game.load.image();
-        game.load.image();
+
     }
 
     this.create = function () {
@@ -1428,7 +1441,7 @@ function Tela8(game) {
 
         function f1() {
             mudarTexto([" Alex? O que…?", " "], 50, 800, 0, alex1);
-        }
+        } 
 
         function alex1() {
             mudarTexto(["Eu não sabia como contar, nem com quem falar… eu preciso de \n\ ajuda!", " "], 50, 800, 4, f2);
@@ -1538,7 +1551,8 @@ function Tela8(game) {
             fundo = game.add.image(0, 0, "floresta2");
             var dialogo = game.add.image(0, 500, "dialogo");
             dialogo.alpha = 0.7;
-            alex = game.add.image(150, 150, "alex");
+            alex.kill();
+            var alexnaoclicavel = game.add.image(150, 150, "alex");
 
             var sangue = game.add.image(450, 376, "sangue");
             sangue.width = 100;
@@ -1555,7 +1569,8 @@ function Tela8(game) {
             }
 
             function f13() {
-                mudarTexto(["Ele não consegue nem arcar com as consequências, \n\ cadê esse filho da-", " "], 50, 800, 0, passos)
+                mudarTexto(["Ele fez essa merda toda e não consegue nem arcar com as \n\ consequências, cadê esse filho da-",
+                           " "], 50, 0, 0, passos)
             }
 
             function passos() {
@@ -1563,13 +1578,15 @@ function Tela8(game) {
                 audiopassos.play()
                 setTimeout(function () {
                     mudarTexto(["Que barulho foi esse? Freddie...", " "], 50, 800, 4, billyaparece)
-                }, 1000)
+                }, 3000)
             }
 
             function billyaparece() {
                 var billy = game.add.image(200, 120, "billy")
+                billy.alpha = 0;
+                game.add.tween(billy).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true);
                 setTimeout(function () {
-                    mudarTexto(["E eu... faria.. tudo... de novo", " "], 50, 800, 5, function () {
+                    mudarTexto(["E eu... faria.. tudo... de novo", " "], 10, 800, 5, function () {
                         setTimeout(function () {
                             game.state.start("Tela9")
                         }, 1500)
@@ -1578,7 +1595,7 @@ function Tela8(game) {
             }
         }
     }
-}
+} //zelia ama a sophia s2
 
 function Tela9(game) {
     this.init = function () {
@@ -1636,7 +1653,7 @@ window.WebFontConfig = {
     //  For some reason if we don't the browser cannot render the text the first time it's created.
     active: function () {
         setTimeout(function () {
-            game.state.start("Tela8"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
+            game.state.start("Tela6"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
         }, 500);
     },
 
