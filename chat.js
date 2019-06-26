@@ -224,13 +224,11 @@ function clicar8a() {
 function clicar8b() {
     setTimeout(function () {document.getElementById("8b").style.display = "block" }, 500)
     setTimeout(function () {document.getElementById("9b").style.display = "block" }, 2000)
-    setTimeout(function () {document.getElementById("msg10").style.display = "block" }, 3500)
-    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 5000)
-    setTimeout(function () {mostrarGrupo("grupo11"); clicando = false;}, 5500)
+    setTimeout(function () {document.getElementById("msg11").style.display = "block" }, 3500)
+    setTimeout(function () {mostrarGrupo("grupo11"); clicando = false;}, 4000)
     setTimeout(function () {scroll()}, 500)
     setTimeout(function () {scroll()}, 2000)
     setTimeout(function () {scroll()}, 3500)
-    setTimeout(function () {scroll()}, 5000)
   }
 
 function clicar11a() {

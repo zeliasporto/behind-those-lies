@@ -12,6 +12,34 @@ canvas {
     margin: 0 auto;
 }
 
+#titulo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 40px;
+    text-align: center;
+    color: #000;
+    position: absolute;
+    text-align: center;
+    top: 170px;
+    left: 300px;
+}
+
+#start {
+    position: absolute;
+    top: 500px;
+    left: 550px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    padding: 10px;
+    background: #000;
+    border: inset 2px;
+    border-color: #fff;
+    color: #fff;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    cursor: url('imagens/cursor-click.png'), auto;
+}
+
 .fundo {
     height: 600px;
     width: 800px;
@@ -426,8 +454,8 @@ canvas {
 .topEyelid {
     position: absolute;
     top: 0;
-    right: 240px;
-    width: 800px;
+    right: 0px;
+    width: 100%;
     height: 400px;
     background-color: #000;
     z-index: 2;
@@ -439,8 +467,8 @@ canvas {
 
 .bottomEyelid {
     position: absolute;
-    right: 240px;
-    width: 800px;
+    right: 0px;
+    width: 100%;
     bottom: 0;
     height: 400px;
     background-color: #000;
@@ -750,7 +778,7 @@ canvas {
     font-size: 9px;
 }
 
-/*#titles {
+#titles {
 	position: absolute;
 	width: 18em;
 	height: 50em;
@@ -759,10 +787,11 @@ canvas {
 	margin-left: -9em;
 	font-size: 350%;
 	font-weight: bold;
-	text-align: justify;
+	text-align: center;
 	overflow: hidden;
 	transform-origin: 50% 100%;
 	transform: perspective(300px) rotateX(25deg);
+    font-family: 'Press Start 2P', cursive;
 }
 
 #titles:after{
@@ -785,7 +814,7 @@ canvas {
 @keyframes scroll {
 	0%   { top:  100%; }
 	100% { top: -170%; }
-} */
+}
 
 ::-webkit-scrollbar {
     width: 5px;

@@ -35,6 +35,10 @@ for (var row = 0; row < n_rows; row++) {
 }
 var colours = "blue red green yellow pink purple".split(/\s+/);
 
+function tela1() {
+    game.state.start("Tela1");
+}
+
 function criarCarro() {
     carro = game.add.image(201, 223, "carro");
     carro.alpha = 1.0;
@@ -475,6 +479,7 @@ function drop(ev) {
             dialogo.alpha = 0.7;
             pingos.destroy();
             togglePuzzle();
+            var postoguynaoclicavel = game.add.sprite(628, 272, "postoguy");
             mudarTexto([
                 "Ótimo trabalho. O que queria saber mesmo?",
                 " "
@@ -550,6 +555,49 @@ function TelaInicial(game) {
     }
 
     this.preload = function () {
+        game.load.crossOrigin = "anonymous";
+
+        game.load.image("telaInicial", "imagens/telaInicial.png");
+
+    }
+    
+    this.create = function () {
+
+        fundo = game.add.image(0, 0, "telaInicial");
+        
+        document.getElementById("telaInicial").className = "telaInicial";
+        
+    }
+}
+
+function Tela1(game) {
+
+    // A função init() não aparecia no sandbox porque eles fazem ela por nós lá! :)
+
+    this.init = function () {
+
+        game.input.maxPointers = 1;
+        // Deixar o jogo executando, mesmo se o browser mudar de aba?
+        game.stage.disableVisibilityChange = true;
+
+        if (game.device.desktop) {
+            // Configurações específicas para desktop
+
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        } else {
+            // Configurações específicas para celulares
+            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
+            game.scale.setMinMax(400, 300, 800, 600);
+            game.scale.forceLandscape = true;
+            // Como criamos o CSS acima, não precisamos centralizar via código
+            game.scale.pageAlignHorizontally = false;
+        }
+
+    }
+
+    this.preload = function () {
         document.getElementById("topEyelid").className = "topEyelid";
         document.getElementById("bottomEyelid").className = "bottomEyelid";
         
@@ -583,6 +631,9 @@ function TelaInicial(game) {
     }
 
     this.create = function () {
+        document.getElementById("telaInicial").className = "escondido";
+        
+        document.getElementById("frases").className = "dialogo";
         tween = null;
         setTimeout(function () {
             mudarTexto([
@@ -591,6 +642,7 @@ function TelaInicial(game) {
                 "Espera, alex mandou mensagem?? a gente não se fala há tanto \n\ tempo. vou ter que responder!",
                 " "
             ], 50, 800, 0);
+            document.getElementById("celularzinho").className = "celularzinho";
         }, 6100);
 
         document.getElementById("msg1").style.display = "block";
@@ -826,6 +878,7 @@ function Tela3(game) {
         game.load.image("botao", "imagens/botao.png");
         game.load.image("dialogo", "imagens/dialogo.png");
         game.load.image("restaurante", "imagens/restaurante.png");
+        game.load.image("rachel", "imagens/rachel.png");
         game.load.audio("campainha", "audios/campainha.mp3");
     }
 
@@ -834,11 +887,18 @@ function Tela3(game) {
         fundo = game.add.image(0, 0, "restaurante");
         var dialogo = game.add.image(0, 500, "dialogo");
         dialogo.alpha = 0.7;
-
+    
+        var rachel = game.add.image(200, 165, "rachel");
+        //rachel.animations.add('falar', [0, 1], 4, true);
+        rachel.inputEnabled = true;
+        rachel.input.useHandCursor = true;
+        rachel.events.onInputDown.add(function () {
         mudarTexto([
         "Freddie? Você por aqui?",
         " "
         ], 50, 800, 1, fred1);
+        //rachel.animations.play("falar");
+        })
 
         function fred1() {
             mudarTexto([
@@ -962,7 +1022,7 @@ function Tela3(game) {
 
         function rachel9() {
             mudarTexto([
-        "Claro, mas você vai precisar o portão com-",
+        "Claro, mas você vai precisar abrir o portão com-",
         " "
         ], 50, 800, 1, chefe);
         }
@@ -1061,8 +1121,8 @@ function Tela4(game) {
 
 function Tela5(game) {
     var fred, cursors, cone1, cone2, cone3, cone4, cone5, cone6, bombaGas;
-    var carros, carro1, carro2, carro3, carro4, bicicleta, caminhao;
-
+    var carros, carro1, carro2, carro3, carro4, bicicleta, caminhao, animacaoAtual;
+    var posicao = 'parado';
 
     this.init = function () {
 
@@ -1091,7 +1151,7 @@ function Tela5(game) {
 
         game.load.image("ruaPuzzle", "imagens/rua.png");
         game.load.image("dialogo", "imagens/dialogo.png");
-        game.load.image("fred", "imagens/cursor.png");
+        game.load.spritesheet("fred", "imagens/minifred.png", 36, 36);
         game.load.image("carro1", "imagens/carro1.png");
         game.load.image("carro2", "imagens/carro2.png");
         game.load.image("botao", "imagens/botao.png");
@@ -1126,6 +1186,15 @@ function Tela5(game) {
         cursors = game.input.keyboard.createCursorKeys();
 
         fred = game.add.sprite(400, 600, "fred");
+        fred.animations.add('cima', [2, 3], 8, true);
+        fred.animations.add('baixo', [3, 2], 8, true);
+        fred.animations.add('esquerda', [2, 3], 8, true);
+        fred.animations.add('direita', [3, 2], 8, true);
+        fred.animations.add('parado', [3], 1, true);
+        
+        //animacaoAtual = 0;
+        fred.animations.play("cima");
+        
         game.physics.arcade.enable(fred, Phaser.Physics.ARCADE);
         fred.anchor.setTo(0.5, 0.5);
         fred.body.collideWorldBounds = true;
@@ -1187,19 +1256,39 @@ function Tela5(game) {
     }
 
     this.update = function () {
+        //fred.animations.play("cima");
+        //fred.animations.play("parado");
+        
         if (cursors.left.isDown) {
+            //posicao = 'esquerda';
+            fred.angle = 270;
             fred.x -= 8;
-            fred.scale.x = -1;
+            fred.animations.play("esquerda");            
         } else if (cursors.right.isDown) {
+            //posicao = 'direita';
+            fred.angle = 90;
             fred.x += 8;
-            fred.scale.x = 1;
-        }
-
-        if (cursors.up.isDown) {
+            fred.animations.play("direita");            
+        }else if (cursors.up.isDown) {
+            //posicao = 'cima';
+            fred.angle = 0;
             fred.y -= 8;
+            fred.animations.play("cima");    
         } else if (cursors.down.isDown) {
+            //posicao = 'baixo';
+            fred.angle = 180;
             fred.y += 8;
+            fred.animations.play("baixo");
+        } else {
+            //posicao = "parado";
+            fred.animations.stop("cima");
+            fred.animations.stop("baixo");
+            fred.animations.stop("esquerda");
+            fred.animations.stop("direita");
         }
+        
+        
+
 
         game.physics.arcade.overlap(carro1, fred, colisao, null, this);
         game.physics.arcade.overlap(fred, cone1, colisao, null, this);
@@ -1208,6 +1297,7 @@ function Tela5(game) {
         game.physics.arcade.overlap(fred, cone3, colisao, null, this);
         game.physics.arcade.overlap(fred, cone4, colisao, null, this);
         game.physics.arcade.overlap(fred, cone5, colisao, null, this);
+        game.physics.arcade.overlap(fred, cone6, colisao, null, this);
         game.physics.arcade.overlap(fred, caminhao, colisao, null, this);
         game.physics.arcade.overlap(fred, bicicleta, colisao, null, this);
         game.physics.arcade.overlap(fred, carro3, colisao, null, this);
@@ -1265,6 +1355,7 @@ function Tela6(game) {
         game.load.image("botao", "imagens/botao.png");
         game.load.image("dialogo", "imagens/dialogo.png");
         game.load.image("posto", "imagens/posto.png");
+        game.load.spritesheet("postoguy", "imagens/postoguy.png", 66, 228);
         game.load.image("canosimg", "imagens/puzzle.png");
         game.load.image("postoconcertado", "imagens/postoconcertado.png");
         game.load.audio("pingos", "audios/dropdrop.mp3");
@@ -1279,10 +1370,15 @@ function Tela6(game) {
         pingos = game.add.audio("pingos", 1.0, true);
         pingos.play();
 
+        var postoguy = game.add.sprite(628, 272, "postoguy");
+        //rachel.animations.add('falar', [0, 1], 4, true);
+        postoguy.inputEnabled = true;
+        postoguy.input.useHandCursor = true;
+        postoguy.events.onInputDown.add(function () {
         mudarTexto([
         "Olá?",
         " "
-        ], 50, 800, 0, cp1);
+        ], 50, 800, 0, cp1);})
 
         function cp1() {
             mudarTexto([
@@ -1324,21 +1420,28 @@ function Tela6(game) {
         "Tá bom, então",
         " "
         ], 50, 800, 0);
-        }
-
-
         var canosimg = game.add.image(275, 402, "canosimg");
         canosimg.anchor.set(0.5);
         canosimg.alpha = 1.0;
         canosimg.inputEnabled = true;
         canosimg.input.useHandCursor = true;
         canosimg.events.onInputDown.add(togglePuzzle, this);
+        }
     }
 }
 
 function Tela7(game) {
-    this.init = function () {
+    var gravidade = 900;
+    var plataforma, chao1, chao2, chao3, chao4;
+    var animacaoAtual, agua;
+    var parando;
+    var armadilha, buraco1, buraco2;
+    var voarD;
+    var bolaFogo;
+    var plataforma2, plataforma4, plataforma3, cursors;
+    var coruja, fred, barbatana, coruja2;
 
+    this.init = function () {
         game.input.maxPointers = 1;
         // Deixar o jogo executando, mesmo se o browser mudar de aba?
         game.stage.disableVisibilityChange = true;
@@ -1357,27 +1460,237 @@ function Tela7(game) {
             // Como criamos o CSS acima, não precisamos centralizar via código
             game.scale.pageAlignHorizontally = false;
         }
+
     }
 
     this.preload = function () {
         game.load.crossOrigin = "anonymous";
-
+        game.load.image("puzzleFloresta", "imagens/puzzleFloresta.png");
+        game.load.image("chao1", "imagens/chao1.png");
+        game.load.image("chao2", "imagens/chao2.png");
+        game.load.image("chao3", "imagens/chao3.png");
+        game.load.image("chao4", "imagens/chao4.png");
+        game.load.image("agua", "imagens/agua.png");
+        game.load.image("plataforma", "imagens/plataforma.png");
+        game.load.image("plataforma2", "imagens/plataforma.png");
+        game.load.image("plataforma3", "imagens/plataforma3.png");
+        game.load.image("plataforma4", "imagens/plataforma3.png");
+        game.load.spritesheet("fred", "imagens/fredandando.png", 30, 114);
+        game.load.image("armadilha", "imagens/armadilha.png");
+        game.load.spritesheet("barbatana", "imagens/barbatana.png");
+        game.load.image("bolaFogo", "imagens/bolaFogo.png");
+        game.load.spritesheet("coruja", "imagens/coruja.png", 77, 48);
+        game.load.spritesheet("coruja2", "imagens/coruja.png", 77, 48);
         game.load.image("botao", "imagens/botao.png");
-
+        game.load.image("buraco1", "imagens/buraco1.png");
+        game.load.image("buraco2", "imagens/buraco2.png");
     }
 
     this.create = function () {
-        botao = game.add.image(735, 5, "botao");
-        botao.alpha = 1.0;
-        botao.inputEnabled = true;
-        botao.input.useHandCursor = true;
-        botao.events.onInputDown.add(function () {
-            abortarMudancaTexto();
-            game.state.start("Tela8");
-        })
+        var imgMochila = document.getElementById("imgMochila");
+        imgMochila.style.display = "none";
+        game.world.setBounds(0, 0, 2260, 600);
+        fundo = game.add.tileSprite(0, 0, 2260, 600, "puzzleFloresta");
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        /*
+        coruja = game.add.sprite(400, 100, 'coruja');
+        game.physics.arcade.enable(coruja, Phaser.Physics.ARCADE);
+        coruja.animations.add("voarE", [12, 13, 14], 4, true);
+        coruja.animations.add("voarD", [24, 25, 26], 3, true);
+        coruja.body.collideWorldBounds = true; */
+
+        barbatana = game.add.sprite(170, 498, "barbatana");
+        barbatana.anchor.setTo(.5);
+        game.physics.arcade.enable(barbatana, Phaser.Physics.ARCADE);
+        barbatana.body.collideWorldBounds = true;
+
+        buraco1 = game.add.sprite(887, 581, "buraco1");
+        game.physics.arcade.enable(buraco1, Phaser.Physics.ARCADE);
+        buraco1.body.collideWorldBounds = true;
+        
+        buraco2 = game.add.sprite(1311, 581, "buraco2");
+        game.physics.arcade.enable(buraco2, Phaser.Physics.ARCADE);
+        buraco2.body.collideWorldBounds = true;
+        
+        plataforma2 = game.add.sprite(1300, 200, "plataforma2");
+        game.physics.arcade.enable(plataforma2, Phaser.Physics.ARCADE);
+        plataforma2.body.immovable = true;
+        
+        plataforma4 = game.add.sprite(1450, 200, "plataforma4");
+        game.physics.arcade.enable(plataforma4, Phaser.Physics.ARCADE);
+        plataforma4.body.immovable = true;
+
+        chao1 = game.add.sprite(0, 489, "chao1");
+        game.physics.arcade.enable(chao1, Phaser.Physics.ARCADE);
+        chao1.body.immovable = true;
+        
+        chao2 = game.add.sprite(600, 475, "chao2");
+        game.physics.arcade.enable(chao2, Phaser.Physics.ARCADE);
+        chao2.body.immovable = true;
+        
+        chao3 = game.add.sprite(1075, 515, "chao3");
+        game.physics.arcade.enable(chao3, Phaser.Physics.ARCADE);
+        chao3.body.immovable = true;
+        
+        chao4 = game.add.sprite(2089, 510, "chao4");
+        game.physics.arcade.enable(chao4, Phaser.Physics.ARCADE);
+        chao4.body.immovable = true;
+
+        plataforma = game.add.physicsGroup();
+        plataforma.create(436, 320, "plataforma");//do meio
+        plataforma.create(220, 430, "plataforma");//1
+        plataforma.setAll("body.immovable", true);
+        
+        plataforma3 = game.add.physicsGroup();
+        plataforma3.create(1600, 260, "plataforma3");
+        plataforma3.create(1751, 320, "plataforma3");
+        plataforma3.create(1900, 380, "plataforma3");
+        plataforma3.setAll("body.immovable", true);
+
+        
+        agua = game.add.sprite(126, 514, "agua");
+        game.physics.arcade.enable(agua, Phaser.Physics.ARCADE);
+
+        fred = game.add.sprite(100, 400, "fred");
+        game.physics.arcade.enable(fred, Phaser.Physics.ARCADE);
+        fred.body.collideWorldBounds = true;
+        fred.body.gravity.y = gravidade;
+        fred.anchor.setTo(0.5, 0.5);
+        game.camera.follow(fred);
+
+        fred.body.bounce.y = 0.2;
+
+        fred.animations.add("direita", [1, 2, 3, 4, 5, ], 5, true);
+        fred.animations.add("parado", [0], 1, true);
+        fred.animations.add("esquerda", [6, 7, 8, 9, 10], 5, true);
+        animacaoAtual = 0;
+        cursors = game.input.keyboard.createCursorKeys();
+    }
+    
+    this.update = function () {
+
+        game.physics.arcade.collide(fred, plataforma);
+        game.physics.arcade.collide(fred, plataforma2);
+        game.physics.arcade.collide(fred, plataforma3);
+        game.physics.arcade.collide(fred, plataforma4);
+        game.physics.arcade.collide(fred, chao1);
+        game.physics.arcade.collide(fred, chao2);
+        game.physics.arcade.collide(fred, chao3);
+        game.physics.arcade.collide(fred, chao4);
+        fred.body.velocity.x = 0;
+        
+
+        if(fred.x >= 2089){
+            var botao = game.add.image(2195, 5, "botao");
+            botao.alpha = 1.0;
+            botao.inputEnabled = true;
+            botao.input.useHandCursor = true;
+            botao.events.onInputDown.add(function () {
+                abortarMudancaTexto();
+                game.state.start("Tela8");
+            })
+        }
+        
+        if(fred.x >= 605){
+              armadilha = game.add.sprite(603, 450, "armadilha");
+              game.physics.arcade.enable(armadilha, Phaser.Physics.ARCADE);
+        }
+
+        /*if (coruja.x >= 800) {
+
+            coruja.animations.play("voarE");
+            coruja.body.velocity.x = -200;
+            coruja.body.velocity.y = 200;
+
+            if (coruja.y >= 400) {
+                coruja.body.velocity.y = -200;
+                //coruja.body.gravity.y = -100;
+            }
+
+        } else if (coruja.x <= 400) {
+            coruja.animations.play("voarD");
+            coruja.body.velocity.x = 200;
+
+            if (coruja.y >= 400) {
+                coruja.body.velocity.y = 200;
+                //coruja.body.gravity.y = -100;
+            }
+        }*/
+
+        if (plataforma2.x >= 1000) {
+            plataforma2.body.velocity.x = -100;
+
+        } else if (plataforma2.x <= 603) {
+            plataforma2.body.velocity.x = 100;
+        }
+        
+        if (plataforma4.y >= 500) {
+            plataforma4.body.velocity.y = -100;
+
+        } else if (plataforma4.y <= 200) {
+            plataforma4.body.velocity.y = 100;
+        }
+        
+        if (barbatana.x >= 540) {
+            barbatana.scale.x *= -1;
+            barbatana.animations.play("voarEsquerda");
+            barbatana.body.velocity.x = -200;
+            game.physics.arcade.enable(barbatana, Phaser.Physics.ARCADE);
+            
+        } else if (barbatana.x <= 170) {
+            barbatana.scale.x *= -1;
+            barbatana.animations.play("voarDireita");
+            barbatana.body.velocity.x = 200;
+        }
+
+        if (cursors.left.isDown) {
+            fred.body.velocity.x = -200;
+            
+        } else if (cursors.right.isDown) {
+            fred.body.velocity.x = 200;
+
+        } else {
+            fred.angle = 0;
+        }
+
+        if (cursors.up.isDown && (fred.body.onFloor() || fred.body.touching.down)) {
+            fred.body.velocity.y = -470;
+        }
+
+        if (fred.body.velocity.x > 0) {
+            if (animacaoAtual !== 1) {
+                animacaoAtual = 1;
+                fred.animations.play("direita");
+            }
+        } else if (fred.body.velocity.x < 0) {
+            if (animacaoAtual !== -1) {
+                animacaoAtual = -1;
+                fred.animations.play("esquerda");
+            }
+        } else {
+            if (animacaoAtual !== 0) {
+                animacaoAtual = 0;
+                fred.animations.play("parado");
+            }
+        }
+
+        game.physics.arcade.overlap(fred, armadilha, morte, null, this);
+        game.physics.arcade.overlap(fred, bolaFogo, morte, null, this);
+        game.physics.arcade.overlap(fred, barbatana, morte, null, this);
+        //game.physics.arcade.overlap(fred, coruja, morte, null, this);
+        game.physics.arcade.overlap(fred, agua, morte, null, this);
+        game.physics.arcade.overlap(fred, buraco1, morte, null, this);
+        game.physics.arcade.overlap(fred, buraco2, morte, null, this);
+
+
+    }
+
+    function morte() {
+        fred.kill();
+        game.state.start(game.state.current);
     }
 }
-
 function Tela8(game) {
     this.init = function () {
 
@@ -1412,8 +1725,8 @@ function Tela8(game) {
         game.load.image("floresta2", "imagens/floresta2.png");
         game.load.image("sangue", "imagens/sangue.png");
         game.load.image("placa", "imagens/placa.png");
-        game.load.image("alex", "imagens/alexchorando.png");
-        game.load.image("billy", "imagens/billy.png");
+        game.load.spritesheet("alex", "imagens/alexchorando.png", 66, 222);
+        game.load.spritesheet("billy", "imagens/billy.png", 66, 234);
         game.load.audio("passos", "audios/audiopassos.mp3");
     }
 
@@ -1424,19 +1737,21 @@ function Tela8(game) {
         var imgMochila = document.getElementById("imgMochila");
         imgMochila.style.display = "";
         
-        var placa = game.add.image(709, 317, "placa");
+        /*var placa = game.add.image(709, 317, "placa");
             placa.alpha = 1.0;
             placa.inputEnabled = true;
             placa.input.useHandCursor = true;
-            placa.events.onInputDown.add(floresta2, this);
-
-        var alex = game.add.image(150, 150, "alex");
-        alex.alpha = 1.0;
+            placa.events.onInputDown.add(floresta2, this); */
+        
+        
+        var alex = game.add.sprite(470, 200, "alex");
+        alex.animations.add('chorar', [0, 1, 2, 3], 4, true);
         alex.inputEnabled = true;
         alex.input.useHandCursor = true;
         alex.events.onInputDown.add(function () {
             mudarTexto(["Até que enfim, você conseguiu chegar.",
                         " "], 50, 800, 4, f1)
+            alex.animations.play("chorar");
         })
 
         function f1() {
@@ -1444,7 +1759,8 @@ function Tela8(game) {
         } 
 
         function alex1() {
-            mudarTexto(["Eu não sabia como contar, nem com quem falar… eu preciso de \n\ ajuda!", " "], 50, 800, 4, f2);
+            mudarTexto(["Eu não sabia como contar, nem com quem falar… Por isso eu te \n\ conduzi até aqui.",
+                        "Pra te pedir ajuda pessoalmente...", " "], 50, 800, 4, f2);
         }
 
         function f2() {
@@ -1462,8 +1778,8 @@ function Tela8(game) {
 
         function alex3() {
             mudarTexto(["Você não esteve presente em todos os momentos… Nos piores, no \n\ caso. Quando tínhamos 12 anos, Billy me chamava \n\ pra ir na casa dele pra jogar “verdade ou desafio”.",
-                                "No começo eram coisas bobas, como um selinho… mas Billy foi \n\ ficando invasivo",
-                                " "], 50, 800, 4, f4)
+                        "No começo eram coisas bobas, como um selinho… mas Billy foi \n\ ficando invasivo",
+                        " "], 50, 800, 4, f4)
         }
 
         function f4() {
@@ -1480,9 +1796,9 @@ function Tela8(game) {
 
         function alex5() {
             mudarTexto(["Ele disse que era um segredo nosso e que a gente só tava se \n\ divertindo.",
-                                "Passei uns anos afastada dele, até mudei de turma.", "Mas aí na festa de 17 da Rachel, ele chegou em mim de novo. \n\ Tentou me beijar mas eu me afastei. Nisso ele agarrou meu \n\ braço e me arrastou pro banheiro.",
-                                "E-eu não queria, mas Billy sempre foi muito mais forte que eu. \n\ Ele puxou minha calça… e acho que o resto você consegue entender.",
-                                " "], 50, 800, 4, f6)
+                        "Passei uns anos afastada dele, até mudei de turma.", "Mas aí na festa de 17 da Rachel, ele chegou em mim de novo. \n\ Tentou me beijar mas eu me afastei. Nisso ele agarrou meu \n\ braço e me arrastou pro banheiro.",
+                        "E-eu não queria, mas Billy sempre foi muito mais forte que eu. \n\ Ele puxou minha calça… e acho que o resto você consegue entender.",
+                        " "], 50, 800, 4, f6)
         }
 
         function f6() {
@@ -1491,8 +1807,8 @@ function Tela8(game) {
 
         function alex6() {
             mudarTexto(["Durante esse último ano ele me perseguia, e não fez o \n\ que fez uma vez só. Eu mudei meus horários, mas não podia \n\ sair do colégio, é o melhor da cidade.",
-                                "Me afastei de você também, porque estava sempre com ele.",
-                                " "], 50, 800, 4, f7)
+                        "Me afastei de você também, porque estava sempre com ele.",
+                        " "], 50, 800, 4, f7)
         }
 
         function f7() {
@@ -1501,8 +1817,8 @@ function Tela8(game) {
 
         function alex7() {
             mudarTexto(["Na festa de ontem eu fui comprar chicletes na loja de conve- \n\ niência do posto atrás da casa da Rachel.",
-                                "Billy apareceu, bêbado e puto, reclamando que alguém na festa \n\ tinha estragado o carro dele. Eu não sabia pra onde fugir. \n\ Ele me viu e recebi aquele mesmo olhar. Eu fiquei com medo.",
-                               " "], 50, 800, 4, f8)
+                        "Billy apareceu, bêbado e puto, reclamando que alguém na festa \n\ tinha estragado o carro dele. Eu não sabia pra onde fugir. \n\ Ele me viu e recebi aquele mesmo olhar. Eu fiquei com medo.",
+                       " "], 50, 800, 4, f8)
         }
 
         function f8() {
@@ -1518,9 +1834,9 @@ function Tela8(game) {
         }
 
         function alex9() {
-            mudarTexto(["Peguei um galho que estava perto da minha mão.", "Acertei o olho dele duas ou três vezes. Ele caiu no chão, não \n\ tava se mexendo, e me escondi aqui na floresta, mas… ele ainda \n\ está ali.",
-                                "Não sei o que fazer com o corpo, com o sangue…",
-                                " "], 50, 800, 4, f10)
+            mudarTexto(["Peguei um galho que estava perto da minha mão.", "Acertei o olho dele duas ou três vezes. Achei que ele so /n/tivesse caído, mas esperei por muito tempo e ele não se mexeu, então eu fugi, mas… ele ainda deve \n\ estar ali.",
+                        "Não sei o que fazer com o corpo, com o sangue…",
+                        " "], 50, 800, 4, f10)
         }
 
         function f10() {
@@ -1536,7 +1852,7 @@ function Tela8(game) {
         }
 
         function alex11() {
-            mudarTexto(["Ta bem...", " "], 50, 800, 4, placa)
+            mudarTexto(["Ta bem... É só seguir o caminho da floresta", " "], 50, 800, 4, placa)
         }
 
         function placa() {
@@ -1552,7 +1868,10 @@ function Tela8(game) {
             var dialogo = game.add.image(0, 500, "dialogo");
             dialogo.alpha = 0.7;
             alex.kill();
-            var alexnaoclicavel = game.add.image(150, 150, "alex");
+            var alexnaoclicavel = game.add.sprite(350, 200, "alex");
+            alexnaoclicavel.animations.add('chorar', [0, 1, 2, 3], 4, true);
+            alexnaoclicavel.animations.play("chorar");
+            
 
             var sangue = game.add.image(450, 376, "sangue");
             sangue.width = 100;
@@ -1582,7 +1901,7 @@ function Tela8(game) {
             }
 
             function billyaparece() {
-                var billy = game.add.image(200, 120, "billy")
+                var billy = game.add.sprite(470, 188, "billy");
                 billy.alpha = 0;
                 game.add.tween(billy).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true);
                 setTimeout(function () {
@@ -1623,10 +1942,14 @@ function Tela9(game) {
     this.preload = function () {
         game.load.crossOrigin = "anonymous";
 
+        document.getElementById("titles").className = "titles";
+        
         game.load.image("creditos", "imagens/creditos.png");
     }
 
     this.create = function () {
+        var imgMochila = document.getElementById("imgMochila");
+        imgMochila.style.display = "none";
         fundo = game.add.image(0, 0, "creditos");
     }
 }
@@ -1638,6 +1961,7 @@ function Tela9(game) {
 // dando nomes para cada uma (para alternar entre uma tela e outra, bastaria
 // executar jogo.state.start("Nome da tela") a qualquer momento)
 game.state.add("TelaInicial", TelaInicial);
+game.state.add("Tela1", Tela1);
 game.state.add("Tela2", Tela2);
 game.state.add("Tela3", Tela3);
 game.state.add("Tela4", Tela4);
@@ -1653,7 +1977,7 @@ window.WebFontConfig = {
     //  For some reason if we don't the browser cannot render the text the first time it's created.
     active: function () {
         setTimeout(function () {
-            game.state.start("Tela6"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
+            game.state.start("TelaInicial"); //GAME STARTING ON WRONG SCREEN FOR TESTING PURPOSES
         }, 500);
     },
 

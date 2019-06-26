@@ -17,6 +17,12 @@
 
     <div id="divJogo"></div>
     <img id="imgMochila" src="imagens/mochila.png" style="display: none; position: absolute; left: 240px; top: 420px;" onclick="toggleDivInventario()" />
+    
+    <div id="telaInicial" class="escondido">
+        <p id="titulo">BEHIND THOSE LIES</p>
+        <button id="start" onclick="tela1()">Start</button>
+    </div>
+    <div id="celularzinho" class="escondido">
     <div>
         <img src="imagens/celular.png" class=celular>
     </div>
@@ -91,8 +97,9 @@
             <button class="right_button" onclick="clicar11b()">obrigado</button>
         </div>
     </div>
+    </div>
 
-    <div id="frases"></div>
+    <div id="frases" class="escondido"></div>
     <div id="divInventario" class="borda" style="display: none">
         <p id="ablinkItens" class="abalink" style="
             float: left;
@@ -215,9 +222,9 @@
         </p>
     </div>
     
-    <!--<div id="titles"><div id="titlecontent">
-	   <p>content</p>
-    </div></div> -->
+    <div id="titles" class="escondido"><div id="titlecontent">
+	   <p>Feito com muito amor e dedicação, este foi o primeiro jogo produzido por Beatriz Sant’anna, Bianca Brussolo, Caroline Lopes, Sophia Marques e Zelia Porto</p>
+    </div></div>
 
 
     <script type="text/javascript" src="jquery.js"></script>
