@@ -3,7 +3,7 @@
 // Vamos chamar a variável de game, para ficar igual ao sandbox!
 var game = new Phaser.Game(800, 600, Phaser.AUTO, "divJogo");
 var botao, botaoAbrirPc, botaoCriarInventario, botao3, botao4, fundo, botaoPodeClicar, telaAtual, telaDepoisDoFadeOut,
-    divInventario = document.getElementById("divInventario"),
+    divPai, divJogo, divInventario = document.getElementById("divInventario"),
     inventario = {};
 var click = false;
 var img, imagem, portao, carro, dialogo;
@@ -536,21 +536,56 @@ function TelaInicial(game) {
         game.input.maxPointers = 1;
         // Deixar o jogo executando, mesmo se o browser mudar de aba?
         game.stage.disableVisibilityChange = true;
+        
+        // https://phaser.io/docs/2.6.2/Phaser.ScaleManager.html
+        // Due to a few issues in the scaling performed by Phaser 2.6.2, we will do it ourselves!
+        // And since we are doing it manually, just turn off all automatic options...
+        game.scale.compatibility.orientationFallback = "viewport";
+        game.scale.compatibility.noMargins = true;
+        game.scale.pageAlignHorizontally = false;
+        game.scale.pageAlignVertically = false;
 
-        if (game.device.desktop) {
-            // Configurações específicas para desktop
+        // https://phaser.io/docs/2.6.2/Phaser.ScaleManager.html#startFullScreen
+        game.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
+        game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
 
-            // Como criamos o CSS acima, não precisamos centralizar via código
-            game.scale.pageAlignHorizontally = false;
-        } else {
-            // Configurações específicas para celulares
-            game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            // Especifica o tamanho mímino e máximo para a área do jogo (de 400x300 até 800x600)
-            game.scale.setMinMax(400, 300, 800, 600);
-            game.scale.forceLandscape = true;
-            // Como criamos o CSS acima, não precisamos centralizar via código
-            game.scale.pageAlignHorizontally = false;
+        function atualizarScale() {
+            var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            divPai.style.width = windowWidth + "px";
+            divPai.style.height = windowHeight + "px";
+            // If we are not in a desktop environment, apply the scale regardless the screen dimensions
+            var width, height;
+            //if (!game.device.desktop || windowWidth <= game.width || windowHeight <= game.height) {
+                var ratioJogo = game.width / game.height;
+                var ratioTela = windowWidth / windowHeight;
+                if (ratioTela > ratioJogo) {
+                    // Vertical borders on each side
+                    height = windowHeight;
+                    width = ((game.width * (windowHeight / game.height)) + 0.5) | 0;
+                } else {
+                    // Horizontal borders above and below
+                    width = windowWidth;
+                    height = ((game.height * (windowWidth / game.width)) + 0.5) | 0;
+                }
+                game.scale.setUserScale(width / game.width, height / game.height);
+            //} else {
+            //    width = game.width;
+            //    height = game.height;
+            //    game.scale.setUserScale(1, 1);
+            //}
+            // Phaser creates a div inside divJogo when in fullscreen mode...
+            var div = divJogo.getElementsByTagName("div");
+            if (div && div.length && div[0])
+                div[0].style.paddingTop = ((windowHeight > height) ? ((windowHeight - height) >> 1) : "0") + "px";
+            game.scale.refresh();
         }
+        if (!divPai) {
+            divPai = document.getElementById("divPai");
+            divJogo = document.getElementById("divJogo");
+            window.addEventListener("resize", atualizarScale);
+        }
+        atualizarScale();
 
     }
 
