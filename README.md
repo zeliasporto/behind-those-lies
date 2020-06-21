@@ -1,2 +1,2 @@
 # behind-those-lies
-um jogo em javascript (phaser) e html feito no 1º semestre por Beatriz Sant'anna, Bianca Brussolo, Caroline Lopes, Sophia Araújo e Zelia Porto
+Um jogo em JavaScript (Phaser) e Html feito no 1º semestre do curso de Sistema de Informações da ESPM por Beatriz Sant'anna, Bianca Brussolo, Caroline Lopes, Sophia Araújo e Zelia Porto
