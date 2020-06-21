@@ -16,23 +16,22 @@
 <body>
 
     <div id="divPai"><div id="divJogo"></div></div>
-    <img id="imgMochila" src="imagens/mochila.png" style="display: none; position: absolute; left: 240px; top: 420px;" onclick="toggleDivInventario()" />
-    
+    <div id="frases" class="escondido"></div>
+    <div id="divMochila">
+    <img id="imgMochila" src="imagens/mochila.png" style="display: none; position: absolute; left: 10px; bottom: 10px;" onclick="toggleDivInventario()" />
+    </div>
+    <img id="icon_mensagem1" src="imagens/icon_mensagem1.png" style="display: none; position: absolute; right: 10px; top: 10px; cursor: url('imagens/cursor-click.png'), auto;" onclick="toggleCelular()" />
+    <img id="icon_mensagem2" src="imagens/icon_mensagem2.png" style="display: none; position: absolute; right: 10px; top: 10px; cursor: url('imagens/cursor-click.png'), auto;" onclick="toggleCelular()" />
+
     <div id="telaInicial" class="escondido">
         <p id="titulo">BEHIND THOSE LIES</p>
         <button id="start" onclick="tela1()">Start</button>
     </div>
-    <div id="celularzinho" class="escondido">
+    <div id="celularzinho" style="display: none">
     <div>
         <img src="imagens/celular.png" class=celular>
     </div>
     <div id="preto" class="escondido"><img src="imagens/preto.jpg"></div>
-    <div id="telabloqueada">
-        <img src="imagens/wallpaper.png" id="wallpaper">
-        <p id="horas">11:40</p>
-        <p id="remetente">Alex</p>
-        <button id="conteudo" onclick="desbloquear()">Oi Fred</button>
-    </div>
     <div class="fundo-chat" id="chat">
         <img src="imagens/msg1.png" class="msgalex" id="msg1">
         <img src="imagens/1a.png" class="msgfred" id="1a">
@@ -99,7 +98,6 @@
     </div>
     </div>
 
-    <div id="frases" class="escondido"></div>
     <div id="divInventario" class="borda" style="display: none">
         <p id="ablinkItens" class="abalink" style="
             float: left;
@@ -223,7 +221,7 @@
     </div>
     
     <div id="titles" class="escondido"><div id="titlecontent">
-	   <p>Feito com muito amor e dedicação, este foi o primeiro jogo produzido por Beatriz Sant’anna, Bianca Brussolo, Caroline Lopes, Sophia Marques e Zelia Porto</p>
+	   <p>Feito com muito amor e dedicação, este foi o primeiro jogo produzido por <br>Beatriz Sant’anna: programação auxiliar, <br>Bianca Brussolo: roteiro, <br>Caroline Lopes: pixel art, <br>Sophia Marques: programação dos minigames e <br>Zelia Porto: programação geral</p>
     </div></div>
 
 

@@ -34,6 +34,46 @@ body {
     vertical-align: middle;
 }
 
+#divMochila {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+#frases {
+    position: absolute;
+    color: white;
+    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    white-space: pre-wrap;
+    width: 800px;
+    line-height: 20px;
+    text-align: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: : border-box;
+}
+
+notificacao {
+    animation-name: sobeDesce;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+@keyframes notificacao {
+    0% {
+        rigth: 10%;
+        height: 0%;
+        box-shadow: none;
+    }
+
+    100% {
+        rigth: 30%;
+        box-shadow:20px 20px 50px grey;
+    }
+}
+
 canvas {
     display: block;
     margin: 0 auto;
@@ -41,29 +81,30 @@ canvas {
 
 #titulo {
     font-family: 'Press Start 2P', cursive;
-    font-size: 40px;
     text-align: center;
     color: #000;
     position: absolute;
     text-align: center;
-    top: 170px;
-    left: 300px;
+    font-size: 250%;
+    top: 25%;
+    width: 100%;
 }
 
 #start {
     position: absolute;
-    top: 500px;
-    left: 550px;
+    bottom: 15%;
+    left: 45%;
     font-family: 'Press Start 2P', cursive;
-    font-size: 20px;
-    padding: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: 80%;
     background: #000;
     border: inset 2px;
     border-color: #fff;
     color: #fff;
     text-align: center;
-    width: 200px;
-    height: 50px;
     cursor: url('imagens/cursor-click.png'), auto;
 }
 
@@ -74,94 +115,32 @@ canvas {
 
 .celular {
     position: absolute;
-    height: 350px;
-    width: 215.5px;
-    bottom: 48px;
-    right: 0px;
-}
-
-#preto {
-    position: absolute;
-    right: 13px;
-    bottom: 88px;
-    width: 188px;
-    height: 271px;
-    z-index: 2;
-}
-
-#telabloqueada {
-    position: absolute;
-    right: 13px;
-    bottom: 88px;
-    width: 188px;
-    height: 271px;
-}
-
-#wallpaper {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-    width: 188px;
-    height: 271px;
-    z-index: 2;
-    cursor: url('imagens/cursor-click.png'), auto;
+    height: 500px;
+    width: 280px;
+    bottom: 50px;
+    right: 520px;
+    box-shadow: 40px;
 }
 
 #chat {
     position: absolute;
-    right: 13px;
-    bottom: 123px;
-    width: 188px;
-    height: 201px;
-    background-color: rgba(195, 230, 222, 0.938);
+    bottom: 158px;
+    right: 540px;
+    height: 290px;
+    width: 240px;
+    background-color: rgba(195, 230, 222);
     overflow-y: scroll;
     overflow-x: hidden;
     white-space: nowrap;
     z-index: 0;
 }
 
-#horas {
-    position: absolute;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 35px;
-    color: #fff;
-    right: 6px;
-    bottom: 175px;
-    z-index: 2;
-    cursor: url('imagens/cursor-click.png'), auto;
-}
-
-#remetente {
-    position: absolute;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    color: #fff;
-    left: 20px;
-    bottom: 125px;
-    z-index: 2;
-    cursor: url('imagens/cursor-click.png'), auto;
-}
-
-#conteudo {
-    position: absolute;
-    font-family: 'Press Start 2P', cursive;
-    background: transparent;
-    border-color: transparent;
-    font-size: 10px;
-    color: #fff;
-    text-align: left;
-    left: 13px;
-    top: 137px;
-    z-index: 2;
-    cursor: url('imagens/cursor-click.png'), auto;
-}
-
 #contato {
     position: absolute;
-    right: 13px;
-    bottom: 324px;
-    width: 188px;
-    height: 35px;
+    bottom: 448px;
+    right: 540px;
+    width: 240px;
+    height: 45px;
     background-color: darkcyan;
     color: white;
     font-family: 'Press Start 2P', cursive;
@@ -171,12 +150,12 @@ canvas {
 
 .input {
     position: absolute;
-    right: 13px;
-    width: 188px;
-    height: 35px;
+    bottom: 108px;
+    right: 540px;
+    width: 240px;
+    height: 50px;
     background-color: #008a8a;
     color: white;
-    bottom: 88px;
     z-index: 0;
 }
 
@@ -191,13 +170,13 @@ canvas {
 .left_button {
     position: absolute;
     font-family: 'Press Start 2P', cursive;
-    font-size: 6px;
+    font-size: 10px;
     background-color: darkcyan;
     color: white;
-    width: 94px;
-    height: 35px;
-    bottom: 88px;
-    right: 107px;
+    width: 120px;
+    height: 50px;
+    bottom: 108px;
+    right: 660px;
     cursor: pointer;
     z-index: 1;
     cursor: url('imagens/cursor-click.png'), auto;
@@ -206,13 +185,13 @@ canvas {
 .right_button {
     position: absolute;
     font-family: 'Press Start 2P', cursive;
-    font-size: 6px;
+    font-size: 10px;
     background-color: darkcyan;
     color: white;
-    width: 94px;
-    height: 35px;
-    bottom: 88px;
-    right: 13px;
+    width: 120px;
+    height: 50px;
+    bottom: 108px;
+    right: 540px;
     cursor: pointer;
     z-index: 1;
     cursor: url('imagens/cursor-click.png'), auto;
@@ -224,17 +203,16 @@ canvas {
 
 #texto {
     position: absolute;
-    right: 45px;
-    top: 13px;
-    width: 100px;
-    height: 160px;
+    left: 55px; 
+    top: 16px;
+    font-size: 15px;
     z-index: 0;
 }
 
 .imagem {
     position: relative;
-    height: 30px;
-    width: 32px;
+    height: 40px;
+    width: 45px;
     left: 5px;
     bottom: -2.5px;
     z-index: 0;
@@ -242,7 +220,7 @@ canvas {
 
 .msgalex {
     position: relative;
-    height: 15%;
+    height: 13%;
     left: 0px;
     margin-top: 5px;
     display: none;
@@ -252,8 +230,9 @@ canvas {
 
 .msgfred {
     position: relative;
-    height: 15%;
+    height: 13%;
     float: right;
+    margin-right: 1px; 
     margin-top: 5px;
     display: none;
     clear: both;
@@ -526,25 +505,6 @@ canvas {
     100% {
         height: 0px;
     }
-}
-
-#frases {
-    position: absolute;
-    color: white;
-    overflow: hidden;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 10px;
-    white-space: nowrap;
-    padding: 20px;
-    line-height: 20px;
-    text-align: left;
-    -webkit-box-sizing: border-box;
-    box-sizing: : border-box;
-    top: 500px;
-    left: 370px;
-    right: 0;
-    height: 100px;
-    white-space: pre-line;
 }
 
 #puzzle {
